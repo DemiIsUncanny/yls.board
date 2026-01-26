@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Board Games Hub</title>
+    <style>
+        :root {
+            --p1-color: #ff4757;
+            --p2-color: #2ed573;
+            --board-bg: #f0f2f5;
+            --space-bg: #ffffff;
+            --special-bg: #ffa502;
+            --trade-bg: #747d8c;
+            --menu-bg: #2f3542;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #dfe4ea;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        h1 { color: #3742fa; margin-bottom: 5px; text-align: center; }
+        p.subtitle { margin-top: 0; font-style: italic; color: #57606f; margin-bottom: 20px; text-align: center;}
+
+        /* --- TELA DE MENU --- */
+        #menu-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            padding: 10px;
+        }
+
+        .menu-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+            border-color: #3742fa;
+        }
+
+        .menu-card h3 { color: #2f3542; margin: 10px 0; }
+        .menu-card p { color: #747d8c; font-size: 0.9em; }
+        .menu-icon { font-size: 3em; margin-bottom: 10px; display: block; }
+
+        /* --- TELA DO JOGO (Inicialmente oculta) --- */
+        #game-view {
+            display: none; /* Escondido por padrão */
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .top-bar {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .back-btn {
+            background: #747d8c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .back-btn:hover { background: #57606f; }
+
+        /* Controles do Jogo */
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .status-display {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+
+        .player-wrapper {
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .player-name-input {
+            border: none;
+            background: transparent;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+            width: 120px;
+            padding: 5px;
+            border-bottom: 1px dashed #ccc;
+            cursor: text;
+        }
+        
+        .player-name-input:focus { outline: none; border-bottom: 2px solid #3742fa; background-color: rgba(255,255,255,0.5); }
+
+        .p1-color { color: var(--p1-color); }
+        .p2-color { color: var(--p2-color); }
+        
+        .active-turn { 
+            background-color: #f1f2f6;
+            border-color: #ccc;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+        }
+        .active-turn .player-name-input { transform: scale(1.05); }
+
+        /* Dado */
+        .dice-container { margin: 10px 0; perspective: 1000px; }
+        #visualDice {
+            font-size: 50px; width: 80px; height: 80px;
+            background-color: white; border: 3px solid #3742fa;
+            border-radius: 15px; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); font-weight: bold; color: #3742fa;
+            cursor: pointer; user-select: none; transition: transform 0.2s;
+        }
+        .shaking { animation: shake 0.5s infinite; background-color: #fffae6 !important; color: #ffa502 !important; border-color: #ffa502 !important; }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        .btn-group { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
+        button.action-btn { border: none; padding: 10px 20px; font-size: 16px; border-radius: 25px; cursor: pointer; transition: transform 0.1s; }
+        #rollBtn { background-color: #3742fa; color: white; padding: 10px 30px; font-size: 18px; }
+        #resetBtn { background-color: white; color: #57606f; border: 1px solid #ccc; font-size: 14px; }
+        button.action-btn:active { transform: scale(0.95); }
+        button.action-btn:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        #messageBox {
+            margin-top: 15px; min-height: 40px; padding: 10px;
+            background-color: #fff3cd; border: 1px solid #ffeeba; border-radius: 5px;
+            color: #856404; width: 90%;
+        }
+
+        /* Tabuleiro */
+        .board {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px; width: 95%; max-width: 1000px;
+        }
+
+        .space {
+            background-color: var(--space-bg); border: 2px solid #ced6e0; border-radius: 8px;
+            padding: 10px; min-height: 80px; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            position: relative; font-size: 14px; font-weight: 500;
+        }
+
+        .space.special { background-color: #ffeaa7; border-color: var(--special-bg); }
+        .space.trade { background-color: #dfe4ea; border-color: var(--trade-bg); }
+        .space.start { background-color: #a4b0be; color: white; }
+        .space.finish { background-color: #ff6b81; color: white; font-weight: bold; }
+
+        .number { position: absolute; top: 2px; left: 5px; font-size: 10px; color: #ccc; }
+
+        /* Peões */
+        .token { width: 20px; height: 20px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3); transition: all 0.5s ease; }
+        .token-container { display: flex; gap: 5px; margin-top: 5px; }
+        .p1-token { background-color: var(--p1-color); }
+        .p2-token { background-color: var(--p2-color); }
+        .instruction { font-weight: bold; color: #2f3542; margin-top: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <div id="menu-view">
+        <h1>🎲 Board Game Hub</h1>
+        <p class="subtitle">Escolha um tabuleiro para jogar:</p>
+        
+        <div class="menu-grid">
+            <div class="menu-card" onclick="loadGame('favorites')">
+                <span class="menu-icon">❤️</span>
+                <h3>Favorites</h3>
+                <p>Pratique falando sobre suas coisas favoritas.<br><em>"My favorite color is..."</em></p>
+            </div>
+
+            <div class="menu-card" onclick="loadGame('routine')">
+                <span class="menu-icon">⏰</span>
+                <h3>Daily Routine</h3>
+                <p>Use o Present Simple para descrever rotinas.<br><em>"I wake up at..."</em></p>
+            </div>
+
+            <div class="menu-card" onclick="loadGame('verbs')">
+                <span class="menu-icon">⚡</span>
+                <h3>Irregular Verbs</h3>
+                <p>Fale o passado dos verbos irregulares.<br><em>"Go -> Went"</em></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-view">
+        <div class="top-bar">
+            <button class="back-btn" onclick="backToMenu()">⬅ Voltar ao Menu</button>
+        </div>
+
+        <h1 id="gameTitle">Título do Jogo</h1>
+        <p class="subtitle" id="gameSubtitle">Descrição</p>
+
+        <div class="controls">
+            <div class="status-display">
+                <div id="p1Wrapper" class="player-wrapper active-turn">
+                    <input type="text" id="p1Input" class="player-name-input p1-color" value="Jogador 1" maxlength="12" oninput="updateName(0, this.value)">
+                </div>
+                <div id="p2Wrapper" class="player-wrapper">
+                    <input type="text" id="p2Input" class="player-name-input p2-color" value="Jogador 2" maxlength="12" oninput="updateName(1, this.value)">
+                </div>
+            </div>
+            
+            <div class="dice-container">
+                <div id="visualDice" onclick="playTurn()">🎲</div>
+            </div>
+
+            <div class="btn-group">
+                <button id="rollBtn" class="action-btn" onclick="playTurn()">Rolar Dado</button>
+            </div>
+            <div class="btn-group">
+                <button id="resetBtn" class="action-btn" onclick="resetGame()">🔄 Reiniciar Tabuleiro</button>
+            </div>
+
+            <div id="messageBox">Edite os nomes e clique em "Rolar Dado"!</div>
+        </div>
+
+        <div class="board" id="gameBoard"></div>
+    </div>
+
+<script>
+    // --- BANCO DE DADOS DOS TABULEIROS ---
+    const boardDatabase = {
+        favorites: {
+            title: "Favorites!",
+            subtitle: "Say your favorite. Use full sentences!",
+            instruction: "My favorite [item] is...",
+            spaces: [
+                { text: "START", type: "start" }, { text: "Color", type: "standard" }, { text: "Season", type: "standard" }, 
+                { text: "GO AHEAD 3", type: "move", val: 3 }, { text: "Actor", type: "standard" }, { text: "Candy", type: "standard" }, 
+                { text: "Singer", type: "standard" }, { text: "Day of the Week", type: "standard" }, { text: "Meat", type: "standard" }, 
+                { text: "TRADE PLACES", type: "trade" }, { text: "Vegetable", type: "standard" }, { text: "Fruit", type: "standard" }, 
+                { text: "Fast Food", type: "standard" }, { text: "GO AHEAD 2", type: "move", val: 2 }, { text: "TV Show", type: "standard" }, 
+                { text: "Book", type: "standard" }, { text: "Time of Day", type: "standard" }, { text: "Job", type: "standard" }, 
+                { text: "Hobbie", type: "standard" }, { text: "Class in School", type: "standard" }, { text: "Movie", type: "standard" }, 
+                { text: "Country", type: "standard" }, { text: "Theme Park", type: "standard" }, { text: "Dessert", type: "standard" }, 
+                { text: "GO BACK 3", type: "move", val: -3 }, { text: "Drink", type: "standard" }, { text: "Ice Cream Flavor", type: "standard" }, 
+                { text: "Food", type: "standard" }, { text: "Shoe Brand", type: "standard" }, { text: "GO BACK 2", type: "move", val: -2 }, 
+                { text: "City", type: "standard" }, { text: "Sport", type: "standard" }, { text: "Holiday", type: "standard" }, 
+                { text: "Game", type: "standard" }, { text: "Pet", type: "standard" }, { text: "Word", type: "standard" }, 
+                { text: "Music", type: "standard" }, { text: "Feeling", type: "standard" }, { text: "Animal", type: "standard" }, 
+                { text: "TRADE PLACES", type: "trade" }, { text: "Adjective", type: "standard" }, { text: "Name", type: "standard" }, 
+                { text: "FINISH", type: "finish" }
+            ]
+        },
+        routine: {
+            title: "Daily Routine",
+            subtitle: "What do you do? Use Present Simple!",
+            instruction: "I usually [action] at/in...",
+            spaces: [
+                { text: "START", type: "start" }, { text: "Wake up", type: "standard" }, { text: "Eat breakfast", type: "standard" },
+                { text: "Brush teeth", type: "standard" }, { text: "GO AHEAD 2", type: "move", val: 2 }, { text: "Go to school/work", type: "standard" },
+                { text: "Take a shower", type: "standard" }, { text: "Get dressed", type: "standard" }, { text: "TRADE PLACES", type: "trade" },
+                { text: "Have lunch", type: "standard" }, { text: "Study", type: "standard" }, { text: "Play games", type: "standard" },
+                { text: "Watch TV", type: "standard" }, { text: "GO BACK 2", type: "move", val: -2 }, { text: "Cook dinner", type: "standard" },
+                { text: "Read a book", type: "standard" }, { text: "Clean the room", type: "standard" }, { text: "Go to bed", type: "standard" },
+                { text: "Exercise", type: "standard" }, { text: "Use the phone", type: "standard" }, { text: "Walk the dog", type: "standard" },
+                { text: "Wash dishes", type: "standard" }, { text: "TRADE PLACES", type: "trade" }, { text: "Relax", type: "standard" },
+                { text: "FINISH", type: "finish" }
+            ]
+        },
+        verbs: {
+            title: "Irregular Verbs",
+            subtitle: "Say the Past Simple form!",
+            instruction: "The past of [verb] is...",
+            spaces: [
+                { text: "START", type: "start" }, { text: "Go", type: "standard" }, { text: "See", type: "standard" },
+                { text: "Eat", type: "standard" }, { text: "Drink", type: "standard" }, { text: "Run", type: "standard" },
+                { text: "GO AHEAD 3", type: "move", val: 3 }, { text: "Buy", type: "standard" }, { text: "Think", type: "standard" },
+                { text: "Sleep", type: "standard" }, { text: "Speak", type: "standard" }, { text: "TRADE PLACES", type: "trade" },
+                { text: "Write", type: "standard" }, { text: "Read", type: "standard" }, { text: "Swim", type: "standard" },
+                { text: "Drive", type: "standard" }, { text: "Make", type: "standard" }, { text: "GO BACK 2", type: "move", val: -2 },
+                { text: "Do", type: "standard" }, { text: "Have", type: "standard" }, { text: "Give", type: "standard" },
+                { text: "Take", type: "standard" }, { text: "Know", type: "standard" }, { text: "Sing", type: "standard" },
+                { text: "Fly", type: "standard" }, { text: "Come", type: "standard" }, { text: "Get", type: "standard" },
+                { text: "FINISH", type: "finish" }
+            ]
+        }
+    };
+
+    // --- LÓGICA DO JOGO ---
+    let currentSpaces = [];
+    let currentInstruction = "";
+    
+    let players = [
+        { name: "Jogador 1", pos: 0, cssClass: "p1-token", id: 0 },
+        { name: "Jogador 2", pos: 0, cssClass: "p2-token", id: 1 }
+    ];
+    let currentPlayerIndex = 0;
+    let isAnimating = false;
+
+    // Elementos DOM
+    const menuView = document.getElementById("menu-view");
+    const gameView = document.getElementById("game-view");
+    const messageBox = document.getElementById("messageBox");
+    const boardEl = document.getElementById("gameBoard");
+    const rollBtn = document.getElementById("rollBtn");
+    const visualDice = document.getElementById("visualDice");
+
+    // Navegação
+    function loadGame(gameId) {
+        const gameData = boardDatabase[gameId];
+        currentSpaces = gameData.spaces;
+        currentInstruction = gameData.instruction;
+
+        // Atualiza textos
+        document.getElementById("gameTitle").innerText = gameData.title;
+        document.getElementById("gameSubtitle").innerText = gameData.subtitle;
+
+        // Reseta estado
+        resetLogic();
+        
+        // Troca telas
+        menuView.style.display = "none";
+        gameView.style.display = "flex";
+        
+        initBoard();
+    }
+
+    function backToMenu() {
+        gameView.style.display = "none";
+        menuView.style.display = "flex";
+    }
+
+    // Inicialização do Tabuleiro
+    function initBoard() {
+        boardEl.innerHTML = "";
+        currentSpaces.forEach((space, index) => {
+            const div = document.createElement("div");
+            div.className = "space";
+            if (space.type === "move" || space.type === "trade") div.classList.add("special");
+            if (space.type === "trade") div.classList.add("trade");
+            if (space.type === "start") div.classList.add("start");
+            if (space.type === "finish") div.classList.add("finish");
+            div.id = `space-${index}`;
+
+            div.innerHTML = `
+                <div class="number">${index}</div>
+                <div>${space.text}</div>
+                <div class="token-container" id="tokens-${index}"></div>
+            `;
+            boardEl.appendChild(div);
+        });
+        updateTokens();
+    }
+
+    function updateName(playerIndex, newName) {
+        if(newName.trim() === "") newName = `Jogador ${playerIndex + 1}`;
+        players[playerIndex].name = newName;
+        updateTokens(); 
+    }
+
+    function updateTokens() {
+        document.querySelectorAll(".token-container").forEach(el => el.innerHTML = "");
+        players.forEach(p => {
+            const container = document.getElementById(`tokens-${p.pos}`);
+            if (container) {
+                const token = document.createElement("div");
+                token.className = `token ${p.cssClass}`;
+                token.title = p.name; 
+                container.appendChild(token);
+            }
+        });
+    }
+
+    // Reiniciar
+    function resetGame() {
+        if(!confirm("Tem certeza que deseja reiniciar o jogo?")) return;
+        resetLogic();
+        updateTokens();
+    }
+
+    function resetLogic() {
+        players.forEach(p => p.pos = 0);
+        currentPlayerIndex = 0;
+        isAnimating = false;
+        rollBtn.disabled = false;
+        rollBtn.style.display = "block";
+        visualDice.style.display = "flex";
+        visualDice.innerText = "🎲";
+        messageBox.style.backgroundColor = "#fff3cd";
+        messageBox.style.color = "#856404";
+        messageBox.innerHTML = "Jogo iniciado! Clique em Rolar Dado.";
+        document.getElementById("p1Wrapper").classList.add("active-turn");
+        document.getElementById("p2Wrapper").classList.remove("active-turn");
+    }
+
+    // Lógica de Turno (Dado e Movimento)
+    function playTurn() {
+        if (isAnimating) return;
+        isAnimating = true;
+        rollBtn.disabled = true;
+
+        const player = players[currentPlayerIndex];
+        messageBox.innerHTML = `🎲 Rolando dado para <strong>${player.name}</strong>...`;
+        
+        visualDice.classList.add("shaking");
+        
+        let rollInterval = setInterval(() => {
+            visualDice.innerText = Math.floor(Math.random() * 6) + 1;
+        }, 80); 
+
+        setTimeout(() => {
+            clearInterval(rollInterval);
+            visualDice.classList.remove("shaking");
+            
+            const dice = Math.floor(Math.random() * 6) + 1;
+            visualDice.innerText = dice;
+            messageBox.innerHTML = `🎲 ${player.name} rolou um <strong>${dice}</strong>!`;
+
+            setTimeout(() => { processMove(player, dice); }, 500);
+        }, 1000);
+    }
+
+    function processMove(player, dice) {
+        let newPos = player.pos + dice;
+        const lastIndex = currentSpaces.length - 1; 
+
+        if (newPos >= lastIndex) {
+            player.pos = lastIndex;
+            updateTokens();
+            finishGame(player);
+        } else {
+            movePlayer(player, newPos);
+        }
+    }
+
+    function movePlayer(player, targetPos) {
+        player.pos = targetPos;
+        updateTokens();
+        
+        const space = currentSpaces[targetPos];
+
+        if (space.type === "move") {
+            messageBox.innerHTML += `<br>🚀 Casa Especial! ${space.text}`;
+            setTimeout(() => {
+                let jumpPos = player.pos + space.val;
+                if (jumpPos < 0) jumpPos = 0;
+                movePlayer(player, jumpPos); 
+            }, 1000);
+            return; 
+        } 
+        else if (space.type === "trade") {
+            messageBox.innerHTML += `<br>🔄 TROCA DE LUGAR! `;
+            setTimeout(() => {
+                const otherPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
+                const tempPos = player.pos;
+                player.pos = players[otherPlayerIndex].pos;
+                players[otherPlayerIndex].pos = tempPos;
+                updateTokens();
+                endTurn(player, space);
+            }, 1500);
+            return;
+        }
+
+        endTurn(player, space);
+    }
+
+    function endTurn(player, space) {
+        if (space.type !== "start" && space.type !== "finish") {
+            // Substitui [placeholder] na instrução pelo texto da casa
+            let instructionText = currentInstruction.replace("[item]", space.text.toLowerCase())
+                                                    .replace("[action]", space.text.toLowerCase())
+                                                    .replace("[verb]", space.text.toLowerCase());
+            
+            messageBox.innerHTML = `
+                <strong>${player.name}</strong> está em: <span style="color:#d63031;">${space.text}</span><br>
+                <span class="instruction">${instructionText}</span>
+            `;
+        }
+
+        currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
+        document.getElementById("p1Wrapper").classList.toggle("active-turn");
+        document.getElementById("p2Wrapper").classList.toggle("active-turn");
+        isAnimating = false;
+        rollBtn.disabled = false;
+    }
+
+    function finishGame(winner) {
+        winner.pos = currentSpaces.length - 1;
+        updateTokens();
+        messageBox.innerHTML = `🎉 <strong>${winner.name} VENCEU!</strong> 🎉`;
+        messageBox.style.backgroundColor = "#d1e7dd";
+        messageBox.style.color = "#0f5132";
+        rollBtn.style.display = "none";
+        visualDice.style.display = "none";
+        isAnimating = false;
+    }
+
+</script>
+</body>
+</html>
