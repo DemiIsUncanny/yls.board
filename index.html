@@ -69,7 +69,7 @@
 
         /* --- TELA DO JOGO (Inicialmente oculta) --- */
         #game-view {
-            display: none; /* Escondido por padrão */
+            display: none;
             flex-direction: column;
             align-items: center;
             width: 100%;
@@ -238,6 +238,12 @@
                 <h3>Irregular Verbs</h3>
                 <p>Fale o passado dos verbos irregulares.<br><em>"Go -> Went"</em></p>
             </div>
+
+            <div class="menu-card" onclick="loadGame('pp_context')">
+                <span class="menu-icon">🧩</span>
+                <h3>Context Challenge</h3>
+                <p>Crie um contexto (Present Perfect) para a frase (Simple Past).<br><em>"I have lost my key, so I couldn't enter."</em></p>
+            </div>
         </div>
     </div>
 
@@ -331,6 +337,46 @@
                 { text: "Do", type: "standard" }, { text: "Have", type: "standard" }, { text: "Give", type: "standard" },
                 { text: "Take", type: "standard" }, { text: "Know", type: "standard" }, { text: "Sing", type: "standard" },
                 { text: "Fly", type: "standard" }, { text: "Come", type: "standard" }, { text: "Get", type: "standard" },
+                { text: "FINISH", type: "finish" }
+            ]
+        },
+        // --- NOVO JOGO ADICIONADO AQUI ---
+        pp_context: {
+            title: "Context Challenge",
+            subtitle: "Add a context (Present Perfect) to the sentence.",
+            instruction: "I [have context], so [sentence].",
+            spaces: [
+                { text: "START", type: "start" }, 
+                { text: "I missed the bus", type: "standard" }, 
+                { text: "She bought a car", type: "standard" }, 
+                { text: "They sold the house", type: "standard" }, 
+                { text: "GO AHEAD 2", type: "move", val: 2 },
+                { text: "I lost my wallet", type: "standard" }, 
+                { text: "He broke his leg", type: "standard" }, 
+                { text: "We ate pizza", type: "standard" }, 
+                { text: "She cried", type: "standard" }, 
+                { text: "TRADE PLACES", type: "trade" }, 
+                { text: "The dog barked", type: "standard" }, 
+                { text: "I forgot the answer", type: "standard" }, 
+                { text: "They arrived late", type: "standard" }, 
+                { text: "GO AHEAD 3", type: "move", val: 3 }, 
+                { text: "He went to the doctor", type: "standard" }, 
+                { text: "I slept all day", type: "standard" }, 
+                { text: "We watched a movie", type: "standard" }, 
+                { text: "She quit her job", type: "standard" }, 
+                { text: "GO BACK 3", type: "move", val: -3 }, 
+                { text: "I drank water", type: "standard" }, 
+                { text: "They called the police", type: "standard" }, 
+                { text: "He failed the test", type: "standard" }, 
+                { text: "I took a shower", type: "standard" }, 
+                { text: "We cleaned the room", type: "standard" }, 
+                { text: "TRADE PLACES", type: "trade" }, 
+                { text: "She wrote a letter", type: "standard" }, 
+                { text: "I visited my mom", type: "standard" }, 
+                { text: "He bought flowers", type: "standard" }, 
+                { text: "We ran away", type: "standard" }, 
+                { text: "GO BACK 2", type: "move", val: -2 }, 
+                { text: "I found 10 dollars", type: "standard" }, 
                 { text: "FINISH", type: "finish" }
             ]
         }
@@ -516,10 +562,13 @@
 
     function endTurn(player, space) {
         if (space.type !== "start" && space.type !== "finish") {
-            // Substitui [placeholder] na instrução pelo texto da casa
+            // Substitui os placeholders na instrução pelo texto da casa
             let instructionText = currentInstruction.replace("[item]", space.text.toLowerCase())
                                                     .replace("[action]", space.text.toLowerCase())
-                                                    .replace("[verb]", space.text.toLowerCase());
+                                                    .replace("[verb]", space.text.toLowerCase())
+                                                    .replace("[sentence]", space.text.toLowerCase())
+                                                    // Caso queira usar um placeholder genérico
+                                                    .replace("[have context]", "<span style='text-decoration: underline'>have + p.p.</span>");
             
             messageBox.innerHTML = `
                 <strong>${player.name}</strong> está em: <span style="color:#d63031;">${space.text}</span><br>
