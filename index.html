@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Board Games Hub</title>
+    <title>Your Language Studio</title>
+    <link rel="icon" type="image/jpg" href="logo.png">
+    
     <style>
         :root {
             /* Paleta de Cores dos Jogadores */
@@ -42,16 +44,48 @@
             padding: 20px;
         }
 
-        h1 { color: #3742fa; margin-bottom: 5px; text-align: center; }
+        /* Estilo da Logo Principal */
+        .main-logo {
+            max-width: 80%;
+            height: auto;
+            width: 350px; /* Tamanho base ajustável */
+            margin-bottom: 10px;
+            display: block;
+        }
+
         p.subtitle { margin-top: 0; font-style: italic; color: #57606f; margin-bottom: 20px; text-align: center;}
+
+        /* Container dos seletores e botões extras do menu */
+        .menu-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
 
         .player-selector-container {
             background: white; padding: 15px 30px; border-radius: 50px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
             display: flex; align-items: center; gap: 15px; border: 2px solid #3742fa;
         }
         .player-selector-container label { font-weight: bold; color: #2f3542; font-size: 1.1em; }
         .player-selector-container select { padding: 5px 10px; font-size: 1.1em; border-radius: 10px; border: 1px solid #ccc; cursor: pointer; }
+
+        .btn-instructions {
+            background-color: #ffa502;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .btn-instructions:hover { transform: scale(1.05); background-color: #eccc68; }
 
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; width: 100%; padding: 10px; }
         .menu-card {
@@ -63,6 +97,33 @@
         .menu-card h3 { color: #2f3542; margin: 10px 0; font-size: 1.1em; }
         .menu-card p { color: #747d8c; font-size: 0.85em; }
         .menu-icon { font-size: 2.5em; margin-bottom: 10px; display: block; }
+
+        /* --- TELA DE INSTRUÇÕES --- */
+        #instructions-view {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            padding: 30px;
+            background-color: white;
+            margin-top: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        #instructions-view h2 { color: #3742fa; border-bottom: 2px solid #ffa502; padding-bottom: 10px; }
+        #instructions-view h3 { color: #2f3542; margin-top: 20px; }
+        #instructions-view p, #instructions-view li { color: #57606f; line-height: 1.6; font-size: 1.1em; }
+        #instructions-view ul { text-align: left; padding-left: 20px; }
+        .mission-box {
+            background-color: #f1f2f6;
+            padding: 15px;
+            border-left: 5px solid #2ed573;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-style: italic;
+        }
 
 
         /* --- LAYOUT DO JOGO --- */
@@ -125,24 +186,24 @@
             bottom: 20px;
             left: 20px;
             background: rgba(255, 255, 255, 0.95);
-            padding: 10px; /* Padding reduzido */
+            padding: 10px;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             z-index: 1000;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px; /* Gap reduzido */
+            gap: 8px;
             border: 2px solid #3742fa;
-            width: 80px; /* Largura fixa pequena */
+            width: 80px;
         }
 
         /* Dado Menor */
         .dice-container { perspective: 1000px; }
         #visualDice {
-            font-size: 35px; /* Fonte menor */
-            width: 60px;     /* Tamanho reduzido */
-            height: 60px;    /* Tamanho reduzido */
+            font-size: 35px;
+            width: 60px;
+            height: 60px;
             background-color: white; border: 2px solid #3742fa;
             border-radius: 12px; display: flex; justify-content: center; align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-weight: bold; color: #3742fa;
@@ -212,18 +273,22 @@
 <body>
 
     <div id="menu-view">
-        <h1>🎲 Board Game Hub</h1>
+        <img src="logo.png" alt="Your Language Studio Logo" class="main-logo">
         <p class="subtitle">Escolha um tabuleiro para jogar:</p>
         
-        <div class="player-selector-container">
-            <label for="playerCount">👥 Número de Jogadores:</label>
-            <select id="playerCount">
-                <option value="2">2 Jogadores</option>
-                <option value="3">3 Jogadores</option>
-                <option value="4">4 Jogadores</option>
-                <option value="5">5 Jogadores</option>
-                <option value="6">6 Jogadores</option>
-            </select>
+        <div class="menu-controls">
+            <div class="player-selector-container">
+                <label for="playerCount">👥 Número de Jogadores:</label>
+                <select id="playerCount">
+                    <option value="2">2 Jogadores</option>
+                    <option value="3">3 Jogadores</option>
+                    <option value="4">4 Jogadores</option>
+                    <option value="5">5 Jogadores</option>
+                    <option value="6">6 Jogadores</option>
+                </select>
+            </div>
+            
+            <button class="btn-instructions" onclick="showInstructions()">📖 Como funciona & Objetivo</button>
         </div>
 
         <div class="menu-grid">
@@ -243,6 +308,33 @@
                 <span class="menu-icon">💬</span> <h3>Conversation Master</h3> <p>60 Casas.</p>
             </div>
         </div>
+    </div>
+
+    <div id="instructions-view">
+        <button class="back-btn" onclick="hideInstructions()" style="align-self: flex-start;">⬅ Voltar ao Menu</button>
+        
+        <h2>Bem-vindo ao Your Language Studio!</h2>
+        
+        <div class="mission-box">
+            "Nosso objetivo é transformar o aprendizado de inglês em uma experiência leve, divertida e altamente interativa. Queremos que você pratique a fala, a gramática e o vocabulário de forma natural, competindo e cooperando com seus amigos!"
+        </div>
+
+        <h3>📝 Como Jogar</h3>
+        <ul>
+            <li><strong>Escolha seu Desafio:</strong> Selecione um dos tabuleiros temáticos no menu (ex: Rotina, Verbos, Conversação).</li>
+            <li><strong>Defina os Jogadores:</strong> Escolha quantos amigos vão jogar com você (de 2 a 6).</li>
+            <li><strong>Role o Dado:</strong> Clique no dado ou no botão "ROLAR" para avançar no tabuleiro.</li>
+            <li><strong>Cumpra a Missão:</strong> Ao cair em uma casa, leia a instrução na caixa amarela. Você deve completar a frase ou responder a pergunta em inglês!</li>
+            <li><strong>Casas Especiais:</strong>
+                <ul>
+                    <li>🚀 <strong>Go Ahead / Go Back:</strong> Avance ou volte casas extras.</li>
+                    <li>🔄 <strong>Trade Places:</strong> Troque de lugar com outro jogador aleatório!</li>
+                </ul>
+            </li>
+            <li><strong>Vitória:</strong> O primeiro a chegar na casa "FINISH" vence o jogo!</li>
+        </ul>
+        
+        <p style="text-align: center; margin-top: 20px;"><strong>Ready? Let's play! 🎲</strong></p>
     </div>
 
     <div id="game-view">
@@ -305,6 +397,7 @@
     // Elementos DOM
     const menuView = document.getElementById("menu-view");
     const gameView = document.getElementById("game-view");
+    const instructionsView = document.getElementById("instructions-view");
     const messageBox = document.getElementById("messageBox");
     const boardEl = document.getElementById("gameBoard");
     const rollBtn = document.getElementById("rollBtn");
@@ -322,8 +415,20 @@
         
         resetLogic();
         menuView.style.display = "none";
+        instructionsView.style.display = "none";
         gameView.style.display = "flex";
         initBoard();
+    }
+
+    function showInstructions() {
+        menuView.style.display = "none";
+        gameView.style.display = "none";
+        instructionsView.style.display = "flex";
+    }
+
+    function hideInstructions() {
+        instructionsView.style.display = "none";
+        menuView.style.display = "flex";
     }
 
     function setupPlayers(count) {
@@ -346,6 +451,7 @@
 
     function backToMenu() {
         gameView.style.display = "none";
+        instructionsView.style.display = "none";
         menuView.style.display = "flex";
     }
 
