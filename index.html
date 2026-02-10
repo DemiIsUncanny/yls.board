@@ -5,85 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Language Studio</title>
     <link rel="icon" type="image/jpg" href="logo.png">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2045943406111949"
+     crossorigin="anonymous"></script>
     
     <style>
         :root {
-            /* Paleta de Cores dos Jogadores */
-            --p1-color: #ff4757; /* Red */
-            --p2-color: #2ed573; /* Green */
-            --p3-color: #1e90ff; /* Blue */
-            --p4-color: #ffa502; /* Orange */
-            --p5-color: #a55eea; /* Purple */
-            --p6-color: #00d2d3; /* Cyan */
-
-            --board-bg: #f0f2f5;
-            --space-bg: #ffffff;
-            --special-bg: #ffa502;
-            --trade-bg: #747d8c;
-            --menu-bg: #2f3542;
+            /* Paleta de Cores */
+            --p1-color: #ff4757; --p2-color: #2ed573; --p3-color: #1e90ff; 
+            --p4-color: #ffa502; --p5-color: #a55eea; --p6-color: #00d2d3;
+            --board-bg: #f0f2f5; --space-bg: #ffffff; --special-bg: #ffa502;
+            --trade-bg: #747d8c; --menu-bg: #2f3542;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #dfe4ea;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            margin: 0; padding: 0; min-height: 100vh;
         }
 
-        /* --- TELA DE MENU --- */
+        /* --- MENU --- */
         #menu-view {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 900px;
-            padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
+            width: 100%; max-width: 900px; padding: 20px;
         }
-
-        /* Estilo da Logo Principal */
-        .main-logo {
-            max-width: 80%;
-            height: auto;
-            width: 350px; /* Tamanho base ajustável */
-            margin-bottom: 10px;
-            display: block;
-        }
-
+        .main-logo { max-width: 80%; height: auto; width: 350px; margin-bottom: 10px; display: block; }
         p.subtitle { margin-top: 0; font-style: italic; color: #57606f; margin-bottom: 20px; text-align: center;}
 
-        /* Container dos seletores e botões extras do menu */
-        .menu-controls {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-            margin-bottom: 30px;
-        }
-
+        .menu-controls { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; margin-bottom: 30px; }
         .player-selector-container {
             background: white; padding: 15px 30px; border-radius: 50px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-            display: flex; align-items: center; gap: 15px; border: 2px solid #3742fa;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 15px; border: 2px solid #3742fa;
         }
         .player-selector-container label { font-weight: bold; color: #2f3542; font-size: 1.1em; }
         .player-selector-container select { padding: 5px 10px; font-size: 1.1em; border-radius: 10px; border: 1px solid #ccc; cursor: pointer; }
 
         .btn-instructions {
-            background-color: #ffa502;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1em;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
+            background-color: #ffa502; color: white; border: none; padding: 10px 20px;
+            border-radius: 25px; font-weight: bold; cursor: pointer; font-size: 1em;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s;
         }
         .btn-instructions:hover { transform: scale(1.05); background-color: #eccc68; }
 
@@ -98,176 +59,97 @@
         .menu-card p { color: #747d8c; font-size: 0.85em; }
         .menu-icon { font-size: 2.5em; margin-bottom: 10px; display: block; }
 
-        /* --- TELA DE INSTRUÇÕES --- */
+        /* --- INSTRUÇÕES --- */
         #instructions-view {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 800px;
-            padding: 30px;
-            background-color: white;
-            margin-top: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: none; flex-direction: column; align-items: center; width: 100%; max-width: 800px;
+            padding: 30px; background-color: white; margin-top: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-        
         #instructions-view h2 { color: #3742fa; border-bottom: 2px solid #ffa502; padding-bottom: 10px; }
         #instructions-view h3 { color: #2f3542; margin-top: 20px; }
         #instructions-view p, #instructions-view li { color: #57606f; line-height: 1.6; font-size: 1.1em; }
         #instructions-view ul { text-align: left; padding-left: 20px; }
-        .mission-box {
-            background-color: #f1f2f6;
-            padding: 15px;
-            border-left: 5px solid #2ed573;
-            border-radius: 5px;
-            margin: 20px 0;
-            font-style: italic;
+        .mission-box { background-color: #f1f2f6; padding: 15px; border-left: 5px solid #2ed573; border-radius: 5px; margin: 20px 0; font-style: italic; }
+
+        /* --- ANÚNCIOS (AJUSTADO) --- */
+        #ad-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.95); z-index: 2000;
+            flex-direction: column; justify-content: center; align-items: center; color: white; backdrop-filter: blur(5px);
         }
-
-
-        /* --- LAYOUT DO JOGO --- */
-        #game-view {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
+        .ad-container {
+            background: white; padding: 15px; border-radius: 10px; display: flex; flex-direction: column;
+            align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            width: 90%; max-width: 350px; /* Largura controlada para o anúncio */
         }
+        /* Espaço para o anúncio */
+        .ad-content { 
+            width: 100%; 
+            min-height: 250px; /* Altura mínima para caber um quadrado médio */
+            background: #f8f9fa; 
+            display: flex; justify-content: center; align-items: center; 
+            margin-bottom: 15px; 
+            overflow: hidden; 
+        }
+        .ad-timer { font-size: 1.2em; margin-bottom: 15px; font-weight: bold; color: #333; }
+        .ad-close-btn {
+            background: #2ed573; color: white; border: none; padding: 12px 30px; font-size: 18px;
+            border-radius: 25px; cursor: pointer; display: none; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: transform 0.1s;
+        }
+        .ad-close-btn:hover { background: #26af61; transform: scale(1.05); }
 
-        /* 1. CABEÇALHO FIXO */
+        /* --- JOGO --- */
+        #game-view { display: none; flex-direction: column; align-items: center; width: 100%; }
         .game-header {
-            position: sticky; top: 0; left: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 1000;
-            padding: 10px; display: flex; flex-direction: column; align-items: center;
-            border-bottom: 1px solid #ccc;
+            position: sticky; top: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 1000;
+            padding: 10px; display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid #ccc;
         }
-
-        .header-top-row {
-            display: flex; justify-content: space-between; align-items: center;
-            width: 100%; max-width: 1200px; margin-bottom: 5px;
-        }
-
-        .back-btn {
-            background: #747d8c; color: white; border: none; padding: 5px 12px;
-            border-radius: 20px; cursor: pointer; font-size: 12px;
-        }
-        .back-btn:hover { background: #57606f; }
-
+        .header-top-row { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; margin-bottom: 5px; }
+        .back-btn { background: #747d8c; color: white; border: none; padding: 5px 12px; border-radius: 20px; cursor: pointer; font-size: 12px; }
         .status-display { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; flex-grow: 1; margin: 0 10px; }
-
-        .player-wrapper {
-            padding: 5px 10px; border-radius: 10px; border: 2px solid transparent;
-            transition: all 0.3s; display: flex; flex-direction: column; align-items: center;
-            background-color: #f1f2f6; min-width: 80px;
-        }
-
-        .player-name-input {
-            border: none; background: transparent; font-size: 1em; font-weight: bold;
-            text-align: center; width: 90px; padding: 2px; border-bottom: 1px dashed #ccc; cursor: text;
-        }
+        .player-wrapper { padding: 5px 10px; border-radius: 10px; border: 2px solid transparent; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; background-color: #f1f2f6; min-width: 80px; }
+        .player-name-input { border: none; background: transparent; font-size: 1em; font-weight: bold; text-align: center; width: 90px; padding: 2px; border-bottom: 1px dashed #ccc; cursor: text; }
         .player-name-input:focus { outline: none; border-bottom: 2px solid #3742fa; }
-
-        .p1-color { color: var(--p1-color); } .p2-color { color: var(--p2-color); }
-        .p3-color { color: var(--p3-color); } .p4-color { color: var(--p4-color); }
-        .p5-color { color: var(--p5-color); } .p6-color { color: var(--p6-color); }
-        
         .active-turn { background-color: #fff; border-color: #3742fa; box-shadow: 0 0 10px rgba(55, 66, 250, 0.3); transform: scale(1.05); }
+        #messageBox { width: 90%; max-width: 800px; background-color: #fff3cd; border: 2px solid #ffeeba; border-radius: 8px; padding: 10px 20px; color: #856404; text-align: center; font-size: 1.2em; line-height: 1.3; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
-        #messageBox {
-            width: 90%; max-width: 800px; background-color: #fff3cd; border: 2px solid #ffeeba;
-            border-radius: 8px; padding: 10px 20px; color: #856404; text-align: center;
-            font-size: 1.2em; line-height: 1.3; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        /* 2. CONTROLES FLUTUANTES (MINIMIZADOS) */
+        /* CONTROLES FLUTUANTES MENORES */
         .floating-controls {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 10px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            border: 2px solid #3742fa;
-            width: 80px;
+            position: fixed; bottom: 15px; left: 15px; background: rgba(255, 255, 255, 0.95);
+            padding: 8px; border-radius: 12px; box-shadow: 0 5px 10px rgba(0,0,0,0.2); z-index: 1000;
+            display: flex; flex-direction: column; align-items: center; gap: 5px; border: 2px solid #3742fa; width: 70px;
         }
-
-        /* Dado Menor */
         .dice-container { perspective: 1000px; }
         #visualDice {
-            font-size: 35px;
-            width: 60px;
-            height: 60px;
+            font-size: 28px; width: 50px; height: 50px; /* Dado Reduzido */
             background-color: white; border: 2px solid #3742fa;
-            border-radius: 12px; display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-weight: bold; color: #3742fa;
+            border-radius: 10px; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold; color: #3742fa;
             cursor: pointer; user-select: none; transition: transform 0.2s;
         }
         .shaking { animation: shake 0.5s infinite; background-color: #fffae6 !important; color: #ffa502 !important; border-color: #ffa502 !important; }
-
-        @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); }
-        }
-
-        /* Botões Compactos */
-        button.action-btn { 
-            border: none; padding: 6px 10px; font-size: 13px; 
-            border-radius: 15px; cursor: pointer; transition: transform 0.1s; 
-            width: 100%; font-weight: bold; 
-        }
-        #rollBtn { 
-            background-color: #3742fa; color: white; font-size: 14px; 
-            box-shadow: 0 2px 4px rgba(55, 66, 250, 0.3); 
-        }
-        #resetBtn { 
-            background-color: transparent; color: #95a5a6; 
-            font-size: 10px; border: 1px solid #dfe6e9; padding: 4px;
-            font-weight: normal;
-        }
-        #resetBtn:hover { background-color: #dfe6e9; color: #d63031; }
+        @keyframes shake { 0% { transform: translate(1px, 1px) rotate(0deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 40% { transform: translate(1px, -1px) rotate(1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 80% { transform: translate(-1px, -1px) rotate(1deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
         
+        button.action-btn { border: none; padding: 5px 8px; font-size: 11px; border-radius: 10px; cursor: pointer; transition: transform 0.1s; width: 100%; font-weight: bold; }
+        #rollBtn { background-color: #3742fa; color: white; font-size: 12px; box-shadow: 0 2px 3px rgba(55, 66, 250, 0.3); }
+        #resetBtn { background-color: transparent; color: #95a5a6; font-size: 9px; border: 1px solid #dfe6e9; padding: 2px; font-weight: normal; }
+        #resetBtn:hover { background-color: #dfe6e9; color: #d63031; }
         button.action-btn:active { transform: scale(0.95); }
         button.action-btn:disabled { background-color: #ccc; cursor: not-allowed; }
 
-        /* 3. TABULEIRO */
-        .board {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
-            gap: 15px; width: 95%; max-width: 1200px;
-            margin-top: 20px; padding-bottom: 50px;
-        }
-
-        .space {
-            background-color: var(--space-bg); border: 2px solid #ced6e0; border-radius: 10px;
-            padding: 15px; min-height: 120px; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            position: relative; font-size: 1.1em; font-weight: 500; transition: transform 0.2s;
-        }
+        .board { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; width: 95%; max-width: 1200px; margin-top: 20px; padding-bottom: 50px; }
+        .space { background-color: var(--space-bg); border: 2px solid #ced6e0; border-radius: 10px; padding: 15px; min-height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; font-size: 1.1em; font-weight: 500; transition: transform 0.2s; }
         .space:hover { transform: scale(1.02); box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 5; }
         .space.special { background-color: #ffeaa7; border-color: var(--special-bg); }
         .space.trade { background-color: #dfe4ea; border-color: var(--trade-bg); }
         .space.start { background-color: #a4b0be; color: white; }
         .space.finish { background-color: #ff6b81; color: white; font-weight: bold; }
         .number { position: absolute; top: 5px; left: 8px; font-size: 12px; color: #999; }
-
-        /* Peões */
         .token { width: 22px; height: 22px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3); transition: all 0.5s ease; }
         .token-container { display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap; justify-content: center; }
-        
-        .p1-token { background-color: var(--p1-color); } .p2-token { background-color: var(--p2-color); }
-        .p3-token { background-color: var(--p3-color); } .p4-token { background-color: var(--p4-color); }
-        .p5-token { background-color: var(--p5-color); } .p6-token { background-color: var(--p6-color); }
-
+        .p1-color { color: #ff4757; } .p2-color { color: #2ed573; } .p3-color { color: #1e90ff; } .p4-color { color: #ffa502; } .p5-color { color: #a55eea; } .p6-color { color: #00d2d3; }
+        .p1-token { background-color: #ff4757; } .p2-token { background-color: #2ed573; } .p3-token { background-color: #1e90ff; } .p4-token { background-color: #ffa502; } .p5-token { background-color: #a55eea; } .p6-token { background-color: #00d2d3; }
         .instruction { font-weight: bold; color: #2f3542; margin-top: 5px; display: block; font-size: 1.1em; }
-
     </style>
 </head>
 <body>
@@ -287,24 +169,23 @@
                     <option value="6">6 Jogadores</option>
                 </select>
             </div>
-            
             <button class="btn-instructions" onclick="showInstructions()">📖 Como funciona & Objetivo</button>
         </div>
 
         <div class="menu-grid">
-            <div class="menu-card" onclick="loadGame('favorites')">
+            <div class="menu-card" onclick="prepareGame('favorites')">
                 <span class="menu-icon">❤️</span> <h3>Favorites</h3> <p>Coisas favoritas.</p>
             </div>
-            <div class="menu-card" onclick="loadGame('routine')">
+            <div class="menu-card" onclick="prepareGame('routine')">
                 <span class="menu-icon">⏰</span> <h3>Daily Routine</h3> <p>Present Simple.</p>
             </div>
-            <div class="menu-card" onclick="loadGame('verbs')">
+            <div class="menu-card" onclick="prepareGame('verbs')">
                 <span class="menu-icon">⚡</span> <h3>Irregular Verbs</h3> <p>Past Simple.</p>
             </div>
-            <div class="menu-card" onclick="loadGame('pp_context')">
+            <div class="menu-card" onclick="prepareGame('pp_context')">
                 <span class="menu-icon">🧩</span> <h3>Context Challenge</h3> <p>Present Perfect.</p>
             </div>
-            <div class="menu-card" onclick="loadGame('conversation')">
+            <div class="menu-card" onclick="prepareGame('conversation')">
                 <span class="menu-icon">💬</span> <h3>Conversation Master</h3> <p>60 Casas.</p>
             </div>
         </div>
@@ -312,40 +193,45 @@
 
     <div id="instructions-view">
         <button class="back-btn" onclick="hideInstructions()" style="align-self: flex-start;">⬅ Voltar ao Menu</button>
-        
         <h2>Bem-vindo ao Your Language Studio!</h2>
-        
-        <div class="mission-box">
-            "Nosso objetivo é transformar o aprendizado de inglês em uma experiência leve, divertida e altamente interativa. Queremos que você pratique a fala, a gramática e o vocabulário de forma natural, competindo e cooperando com seus amigos!"
-        </div>
-
+        <div class="mission-box">"Nosso objetivo é transformar o aprendizado de inglês em uma experiência leve, divertida e altamente interativa."</div>
         <h3>📝 Como Jogar</h3>
         <ul>
-            <li><strong>Escolha seu Desafio:</strong> Selecione um dos tabuleiros temáticos no menu (ex: Rotina, Verbos, Conversação).</li>
-            <li><strong>Defina os Jogadores:</strong> Escolha quantos amigos vão jogar com você (de 2 a 6).</li>
-            <li><strong>Role o Dado:</strong> Clique no dado ou no botão "ROLAR" para avançar no tabuleiro.</li>
-            <li><strong>Cumpra a Missão:</strong> Ao cair em uma casa, leia a instrução na caixa amarela. Você deve completar a frase ou responder a pergunta em inglês!</li>
-            <li><strong>Casas Especiais:</strong>
-                <ul>
-                    <li>🚀 <strong>Go Ahead / Go Back:</strong> Avance ou volte casas extras.</li>
-                    <li>🔄 <strong>Trade Places:</strong> Troque de lugar com outro jogador aleatório!</li>
-                </ul>
-            </li>
-            <li><strong>Vitória:</strong> O primeiro a chegar na casa "FINISH" vence o jogo!</li>
+            <li><strong>Escolha seu Desafio:</strong> Selecione um dos tabuleiros temáticos.</li>
+            <li><strong>Defina os Jogadores:</strong> Escolha quantos amigos vão jogar (2 a 6).</li>
+            <li><strong>Role o Dado:</strong> Clique no dado ou no botão "ROLAR".</li>
+            <li><strong>Cumpra a Missão:</strong> Complete a frase ou responda a pergunta da casa.</li>
+            <li><strong>Vitória:</strong> O primeiro a chegar no "FINISH" vence!</li>
         </ul>
-        
-        <p style="text-align: center; margin-top: 20px;"><strong>Ready? Let's play! 🎲</strong></p>
+    </div>
+
+    <div id="ad-overlay">
+        <div class="ad-container">
+            <div class="ad-content">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-2045943406111949"
+                     data-ad-slot="4586042728"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <div style="font-size: 0.8em; color: #ccc; margin-bottom: 10px;">Publicidade</div>
+
+            <div class="ad-timer" id="adTimer">O jogo começa em 5s...</div>
+            <button class="ad-close-btn" id="adCloseBtn" onclick="closeAdAndPlay()">JOGAR AGORA! 🚀</button>
+        </div>
     </div>
 
     <div id="game-view">
-        
         <div class="game-header">
             <div class="header-top-row">
                 <button class="back-btn" onclick="backToMenu()">⬅ Menu</button>
-                <div class="status-display" id="players-area">
-                    </div>
+                <div class="status-display" id="players-area"></div>
             </div>
-            
             <div id="messageBox">Edite os nomes acima e clique no dado para começar!</div>
         </div>
 
@@ -361,272 +247,152 @@
     </div>
 
 <script>
-    // --- BANCO DE DADOS ---
+    // --- LÓGICA DE ANÚNCIOS ---
+    let pendingGameId = null;
+    function prepareGame(gameId) {
+        pendingGameId = gameId;
+        const overlay = document.getElementById('ad-overlay');
+        const timerEl = document.getElementById('adTimer');
+        const btn = document.getElementById('adCloseBtn');
+        
+        overlay.style.display = 'flex';
+        btn.style.display = 'none';
+        
+        let timeLeft = 5; 
+        timerEl.innerText = `O jogo começa em ${timeLeft}s...`;
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            if (timeLeft > 0) {
+                timerEl.innerText = `O jogo começa em ${timeLeft}s...`;
+            } else {
+                clearInterval(countdown);
+                timerEl.innerText = "";
+                btn.style.display = 'block';
+            }
+        }, 1000);
+    }
+    function closeAdAndPlay() {
+        document.getElementById('ad-overlay').style.display = 'none';
+        if (pendingGameId) loadGame(pendingGameId);
+    }
+
+    // --- DADOS ---
     const boardDatabase = {
-        favorites: {
-            title: "Favorites!", subtitle: "Say your favorite. Use full sentences!", instruction: "My favorite [item] is...",
-            spaces: [ { text: "START", type: "start" }, { text: "Color", type: "standard" }, { text: "Season", type: "standard" }, { text: "GO AHEAD 3", type: "move", val: 3 }, { text: "Actor", type: "standard" }, { text: "Candy", type: "standard" }, { text: "Singer", type: "standard" }, { text: "Day of the Week", type: "standard" }, { text: "Meat", type: "standard" }, { text: "TRADE PLACES", type: "trade" }, { text: "Vegetable", type: "standard" }, { text: "Fruit", type: "standard" }, { text: "Fast Food", type: "standard" }, { text: "GO AHEAD 2", type: "move", val: 2 }, { text: "TV Show", type: "standard" }, { text: "Book", type: "standard" }, { text: "Time of Day", type: "standard" }, { text: "Job", type: "standard" }, { text: "Hobbie", type: "standard" }, { text: "Class in School", type: "standard" }, { text: "Movie", type: "standard" }, { text: "Country", type: "standard" }, { text: "Theme Park", type: "standard" }, { text: "Dessert", type: "standard" }, { text: "GO BACK 3", type: "move", val: -3 }, { text: "Drink", type: "standard" }, { text: "Ice Cream Flavor", type: "standard" }, { text: "Food", type: "standard" }, { text: "Shoe Brand", type: "standard" }, { text: "GO BACK 2", type: "move", val: -2 }, { text: "City", type: "standard" }, { text: "Sport", type: "standard" }, { text: "Holiday", type: "standard" }, { text: "Game", type: "standard" }, { text: "Pet", type: "standard" }, { text: "Word", type: "standard" }, { text: "Music", type: "standard" }, { text: "Feeling", type: "standard" }, { text: "Animal", type: "standard" }, { text: "TRADE PLACES", type: "trade" }, { text: "Adjective", type: "standard" }, { text: "Name", type: "standard" }, { text: "FINISH", type: "finish" } ]
-        },
-        routine: {
-            title: "Daily Routine", subtitle: "What do you do?", instruction: "I usually [action] at/in...",
-            spaces: [ { text: "START", type: "start" }, { text: "Wake up", type: "standard" }, { text: "Eat breakfast", type: "standard" }, { text: "Brush teeth", type: "standard" }, { text: "GO AHEAD 2", type: "move", val: 2 }, { text: "Go to school/work", type: "standard" }, { text: "Take a shower", type: "standard" }, { text: "Get dressed", type: "standard" }, { text: "TRADE PLACES", type: "trade" }, { text: "Have lunch", type: "standard" }, { text: "Study", type: "standard" }, { text: "Play games", type: "standard" }, { text: "Watch TV", type: "standard" }, { text: "GO BACK 2", type: "move", val: -2 }, { text: "Cook dinner", type: "standard" }, { text: "Read a book", type: "standard" }, { text: "Clean the room", type: "standard" }, { text: "Go to bed", type: "standard" }, { text: "Exercise", type: "standard" }, { text: "Use the phone", type: "standard" }, { text: "Walk the dog", type: "standard" }, { text: "Wash dishes", type: "standard" }, { text: "TRADE PLACES", type: "trade" }, { text: "Relax", type: "standard" }, { text: "FINISH", type: "finish" } ]
-        },
-        verbs: {
-            title: "Irregular Verbs", subtitle: "Say the Past Simple form!", instruction: "The past of [verb] is...",
-            spaces: [ { text: "START", type: "start" }, { text: "Go", type: "standard" }, { text: "See", type: "standard" }, { text: "Eat", type: "standard" }, { text: "Drink", type: "standard" }, { text: "Run", type: "standard" }, { text: "GO AHEAD 3", type: "move", val: 3 }, { text: "Buy", type: "standard" }, { text: "Think", type: "standard" }, { text: "Sleep", type: "standard" }, { text: "Speak", type: "standard" }, { text: "TRADE PLACES", type: "trade" }, { text: "Write", type: "standard" }, { text: "Read", type: "standard" }, { text: "Swim", type: "standard" }, { text: "Drive", type: "standard" }, { text: "Make", type: "standard" }, { text: "GO BACK 2", type: "move", val: -2 }, { text: "Do", type: "standard" }, { text: "Have", type: "standard" }, { text: "Give", type: "standard" }, { text: "Take", type: "standard" }, { text: "Know", type: "standard" }, { text: "Sing", type: "standard" }, { text: "Fly", type: "standard" }, { text: "Come", type: "standard" }, { text: "Get", type: "standard" }, { text: "FINISH", type: "finish" } ]
-        },
-        pp_context: {
-            title: "Context Challenge", subtitle: "Add a context (Present Perfect).", instruction: "I [have context], so [sentence].",
-            spaces: [ { text: "START", type: "start" }, { text: "I missed the bus", type: "standard" }, { text: "She bought a car", type: "standard" }, { text: "They sold the house", type: "standard" }, { text: "GO AHEAD 2", type: "move", val: 2 }, { text: "I lost my wallet", type: "standard" }, { text: "He broke his leg", type: "standard" }, { text: "We ate pizza", type: "standard" }, { text: "She cried", type: "standard" }, { text: "TRADE PLACES", type: "trade" }, { text: "The dog barked", type: "standard" }, { text: "I forgot the answer", type: "standard" }, { text: "They arrived late", type: "standard" }, { text: "GO AHEAD 3", type: "move", val: 3 }, { text: "He went to the doctor", type: "standard" }, { text: "I slept all day", type: "standard" }, { text: "We watched a movie", type: "standard" }, { text: "She quit her job", type: "standard" }, { text: "GO BACK 3", type: "move", val: -3 }, { text: "I drank water", type: "standard" }, { text: "They called the police", type: "standard" }, { text: "He failed the test", type: "standard" }, { text: "I took a shower", type: "standard" }, { text: "We cleaned the room", type: "standard" }, { text: "TRADE PLACES", type: "trade" }, { text: "She wrote a letter", type: "standard" }, { text: "I visited my mom", type: "standard" }, { text: "He bought flowers", type: "standard" }, { text: "We ran away", type: "standard" }, { text: "GO BACK 2", type: "move", val: -2 }, { text: "I found 10 dollars", type: "standard" }, { text: "FINISH", type: "finish" } ]
-        },
-        conversation: {
-            title: "Conversation Master", subtitle: "Talk for 1 minute!", instruction: "Let's talk about [topic]...",
-            spaces: [ { text: "START", type: "start" }, { text: "Dream Job", type: "standard" }, { text: "Favorite Movie", type: "standard" }, { text: "GO AHEAD 2", type: "move", val: 2 }, { text: "Best Friend", type: "standard" }, { text: "Worst Habit", type: "standard" }, { text: "TRADE PLACES", type: "trade" }, { text: "Hobbies", type: "standard" }, { text: "Rainy Day", type: "standard" }, { text: "Biggest Fear", type: "standard" }, { text: "GO AHEAD 3", type: "move", val: 3 }, { text: "Favorite Season", type: "standard" }, { text: "Role Model", type: "standard" }, { text: "Social Media", type: "standard" }, { text: "GO BACK 2", type: "move", val: -2 }, { text: "Superpower", type: "standard" }, { text: "Aliens", type: "standard" }, { text: "Favorite Food", type: "standard" }, { text: "Money or Fame", type: "standard" }, { text: "TRADE PLACES", type: "trade" }, { text: "Best Vacation", type: "standard" }, { text: "Happiness", type: "standard" }, { text: "Shopping", type: "standard" }, { text: "GO AHEAD 4", type: "move", val: 4 }, { text: "Technology", type: "standard" }, { text: "Cooking", type: "standard" }, { text: "Future Plans", type: "standard" }, { text: "GO BACK 3", type: "move", val: -3 }, { text: "Favorite Animal", type: "standard" }, { text: "Childhood", type: "standard" }, { text: "TRADE PLACES", type: "trade" }, { text: "Sports", type: "standard" }, { text: "Music Taste", type: "standard" }, { text: "GO AHEAD 2", type: "move", val: 2 }, { text: "Book or Movie", type: "standard" }, { text: "Morning/Night", type: "standard" }, { text: "Stress Relief", type: "standard" }, { text: "GO BACK 2", type: "move", val: -2 }, { text: "Perfect Date", type: "standard" }, { text: "Lottery Win", type: "standard" }, { text: "TRADE PLACES", type: "trade" }, { text: "Climate Change", type: "standard" }, { text: "Learning English", type: "standard" }, { text: "GO AHEAD 2", type: "move", val: 2 }, { text: "Video Games", type: "standard" }, { text: "Holidays", type: "standard" }, { text: "GO BACK 3", type: "move", val: -3 }, { text: "Guilty Pleasure", type: "standard" }, { text: "Best Advice", type: "standard" }, { text: "TRADE PLACES", type: "trade" }, { text: "Hidden Talent", type: "standard" }, { text: "A Lie You Told", type: "standard" }, { text: "GO BACK 5", type: "move", val: -5 }, { text: "3 Wishes", type: "standard" }, { text: "Embarrassing Moment", type: "standard" }, { text: "Proud Moment", type: "standard" }, { text: "Phobias", type: "standard" }, { text: "Ideal House", type: "standard" }, { text: "FINISH", type: "finish" } ]
-        }
+        favorites: { title: "Favorites!", subtitle: "Say your favorite.", instruction: "My favorite [item] is...", spaces: [ {text:"START",type:"start"},{text:"Color",type:"standard"},{text:"Season",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Actor",type:"standard"},{text:"Candy",type:"standard"},{text:"Singer",type:"standard"},{text:"Day of the Week",type:"standard"},{text:"Meat",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Vegetable",type:"standard"},{text:"Fruit",type:"standard"},{text:"Fast Food",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"TV Show",type:"standard"},{text:"Book",type:"standard"},{text:"Time of Day",type:"standard"},{text:"Job",type:"standard"},{text:"Hobbie",type:"standard"},{text:"Class in School",type:"standard"},{text:"Movie",type:"standard"},{text:"Country",type:"standard"},{text:"Theme Park",type:"standard"},{text:"Dessert",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Drink",type:"standard"},{text:"Ice Cream Flavor",type:"standard"},{text:"Food",type:"standard"},{text:"Shoe Brand",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"City",type:"standard"},{text:"Sport",type:"standard"},{text:"Holiday",type:"standard"},{text:"Game",type:"standard"},{text:"Pet",type:"standard"},{text:"Word",type:"standard"},{text:"Music",type:"standard"},{text:"Feeling",type:"standard"},{text:"Animal",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Adjective",type:"standard"},{text:"Name",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        routine: { title: "Daily Routine", subtitle: "Present Simple", instruction: "I usually [action]...", spaces: [ {text:"START",type:"start"},{text:"Wake up",type:"standard"},{text:"Eat breakfast",type:"standard"},{text:"Brush teeth",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Go to school/work",type:"standard"},{text:"Take a shower",type:"standard"},{text:"Get dressed",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Have lunch",type:"standard"},{text:"Study",type:"standard"},{text:"Play games",type:"standard"},{text:"Watch TV",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Cook dinner",type:"standard"},{text:"Read a book",type:"standard"},{text:"Clean the room",type:"standard"},{text:"Go to bed",type:"standard"},{text:"Exercise",type:"standard"},{text:"Use the phone",type:"standard"},{text:"Walk the dog",type:"standard"},{text:"Wash dishes",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Relax",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        verbs: { title: "Irregular Verbs", subtitle: "Past Simple", instruction: "The past of [verb] is...", spaces: [ {text:"START",type:"start"},{text:"Go",type:"standard"},{text:"See",type:"standard"},{text:"Eat",type:"standard"},{text:"Drink",type:"standard"},{text:"Run",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Buy",type:"standard"},{text:"Think",type:"standard"},{text:"Sleep",type:"standard"},{text:"Speak",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Write",type:"standard"},{text:"Read",type:"standard"},{text:"Swim",type:"standard"},{text:"Drive",type:"standard"},{text:"Make",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Do",type:"standard"},{text:"Have",type:"standard"},{text:"Give",type:"standard"},{text:"Take",type:"standard"},{text:"Know",type:"standard"},{text:"Sing",type:"standard"},{text:"Fly",type:"standard"},{text:"Come",type:"standard"},{text:"Get",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        pp_context: { title: "Context Challenge", subtitle: "Present Perfect", instruction: "I [have context], so [sentence].", spaces: [ {text:"START",type:"start"},{text:"I missed the bus",type:"standard"},{text:"She bought a car",type:"standard"},{text:"They sold the house",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I lost my wallet",type:"standard"},{text:"He broke his leg",type:"standard"},{text:"We ate pizza",type:"standard"},{text:"She cried",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"The dog barked",type:"standard"},{text:"I forgot the answer",type:"standard"},{text:"They arrived late",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"He went to the doctor",type:"standard"},{text:"I slept all day",type:"standard"},{text:"We watched a movie",type:"standard"},{text:"She quit her job",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"I drank water",type:"standard"},{text:"They called the police",type:"standard"},{text:"He failed the test",type:"standard"},{text:"I took a shower",type:"standard"},{text:"We cleaned the room",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"She wrote a letter",type:"standard"},{text:"I visited my mom",type:"standard"},{text:"He bought flowers",type:"standard"},{text:"We ran away",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I found 10 dollars",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        conversation: { title: "Conversation Master", subtitle: "Talk for 1 minute!", instruction: "Let's talk about [topic]...", spaces: [ {text:"START",type:"start"},{text:"Dream Job",type:"standard"},{text:"Favorite Movie",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Best Friend",type:"standard"},{text:"Worst Habit",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Hobbies",type:"standard"},{text:"Rainy Day",type:"standard"},{text:"Biggest Fear",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Favorite Season",type:"standard"},{text:"Role Model",type:"standard"},{text:"Social Media",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Superpower",type:"standard"},{text:"Aliens",type:"standard"},{text:"Favorite Food",type:"standard"},{text:"Money or Fame",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Best Vacation",type:"standard"},{text:"Happiness",type:"standard"},{text:"Shopping",type:"standard"},{text:"GO AHEAD 4",type:"move",val:4},{text:"Technology",type:"standard"},{text:"Cooking",type:"standard"},{text:"Future Plans",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Favorite Animal",type:"standard"},{text:"Childhood",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Sports",type:"standard"},{text:"Music Taste",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Book or Movie",type:"standard"},{text:"Morning/Night",type:"standard"},{text:"Stress Relief",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Perfect Date",type:"standard"},{text:"Lottery Win",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Climate Change",type:"standard"},{text:"Learning English",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Video Games",type:"standard"},{text:"Holidays",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Guilty Pleasure",type:"standard"},{text:"Best Advice",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Hidden Talent",type:"standard"},{text:"A Lie You Told",type:"standard"},{text:"GO BACK 5",type:"move",val:-5},{text:"3 Wishes",type:"standard"},{text:"Embarrassing Moment",type:"standard"},{text:"Proud Moment",type:"standard"},{text:"Phobias",type:"standard"},{text:"Ideal House",type:"standard"},{text:"FINISH",type:"finish"} ]}
     };
 
-    // --- LÓGICA DO JOGO ---
-    let currentSpaces = [];
-    let currentInstruction = "";
-    let players = [];
-    let currentPlayerIndex = 0;
-    let isAnimating = false;
+    let currentSpaces = []; let currentInstruction = ""; let players = []; let currentPlayerIndex = 0; let isAnimating = false;
     const playerColors = ["p1-token", "p2-token", "p3-token", "p4-token", "p5-token", "p6-token"];
     const textColors = ["p1-color", "p2-color", "p3-color", "p4-color", "p5-color", "p6-color"];
-
-    // Elementos DOM
-    const menuView = document.getElementById("menu-view");
-    const gameView = document.getElementById("game-view");
-    const instructionsView = document.getElementById("instructions-view");
-    const messageBox = document.getElementById("messageBox");
-    const boardEl = document.getElementById("gameBoard");
-    const rollBtn = document.getElementById("rollBtn");
-    const visualDice = document.getElementById("visualDice");
-    const playerCountSelect = document.getElementById("playerCount");
-    const playersArea = document.getElementById("players-area");
+    const menuView = document.getElementById("menu-view"); const gameView = document.getElementById("game-view"); const instructionsView = document.getElementById("instructions-view");
+    const messageBox = document.getElementById("messageBox"); const boardEl = document.getElementById("gameBoard"); const rollBtn = document.getElementById("rollBtn");
+    const visualDice = document.getElementById("visualDice"); const playerCountSelect = document.getElementById("playerCount"); const playersArea = document.getElementById("players-area");
 
     function loadGame(gameId) {
-        const gameData = boardDatabase[gameId];
-        currentSpaces = gameData.spaces;
-        currentInstruction = gameData.instruction;
-
-        const numPlayers = parseInt(playerCountSelect.value);
-        setupPlayers(numPlayers);
-        
+        const gameData = boardDatabase[gameId]; currentSpaces = gameData.spaces; currentInstruction = gameData.instruction;
+        const numPlayers = parseInt(playerCountSelect.value); setupPlayers(numPlayers);
         resetLogic();
-        menuView.style.display = "none";
-        instructionsView.style.display = "none";
-        gameView.style.display = "flex";
+        menuView.style.display = "none"; instructionsView.style.display = "none"; gameView.style.display = "flex";
         initBoard();
     }
 
-    function showInstructions() {
-        menuView.style.display = "none";
-        gameView.style.display = "none";
-        instructionsView.style.display = "flex";
-    }
-
-    function hideInstructions() {
-        instructionsView.style.display = "none";
-        menuView.style.display = "flex";
-    }
-
+    function showInstructions() { menuView.style.display = "none"; gameView.style.display = "none"; instructionsView.style.display = "flex"; }
+    function hideInstructions() { instructionsView.style.display = "none"; menuView.style.display = "flex"; }
     function setupPlayers(count) {
-        players = [];
-        playersArea.innerHTML = ""; 
-
+        players = []; playersArea.innerHTML = "";
         for (let i = 0; i < count; i++) {
             players.push({ name: `Jogador ${i + 1}`, pos: 0, cssClass: playerColors[i], id: i });
-
-            const wrapper = document.createElement("div");
-            wrapper.className = "player-wrapper";
-            wrapper.id = `wrapper-${i}`;
-            
-            wrapper.innerHTML = `
-                <input type="text" class="player-name-input ${textColors[i]}" value="Jogador ${i + 1}" maxlength="10" oninput="updateName(${i}, this.value)">
-            `;
+            const wrapper = document.createElement("div"); wrapper.className = "player-wrapper"; wrapper.id = `wrapper-${i}`;
+            wrapper.innerHTML = `<input type="text" class="player-name-input ${textColors[i]}" value="Jogador ${i + 1}" maxlength="10" oninput="updateName(${i}, this.value)">`;
             playersArea.appendChild(wrapper);
         }
     }
-
-    function backToMenu() {
-        gameView.style.display = "none";
-        instructionsView.style.display = "none";
-        menuView.style.display = "flex";
-    }
-
+    function backToMenu() { gameView.style.display = "none"; instructionsView.style.display = "none"; menuView.style.display = "flex"; }
     function initBoard() {
         boardEl.innerHTML = "";
         currentSpaces.forEach((space, index) => {
-            const div = document.createElement("div");
-            div.className = "space";
-            if (space.type === "move" || space.type === "trade") div.classList.add("special");
-            if (space.type === "trade") div.classList.add("trade");
-            if (space.type === "start") div.classList.add("start");
-            if (space.type === "finish") div.classList.add("finish");
+            const div = document.createElement("div"); div.className = "space";
+            if (space.type === "move" || space.type === "trade") div.classList.add("special"); if (space.type === "trade") div.classList.add("trade"); if (space.type === "start") div.classList.add("start"); if (space.type === "finish") div.classList.add("finish");
             div.id = `space-${index}`;
-
-            div.innerHTML = `
-                <div class="number">${index}</div>
-                <div>${space.text}</div>
-                <div class="token-container" id="tokens-${index}"></div>
-            `;
+            div.innerHTML = `<div class="number">${index}</div><div>${space.text}</div><div class="token-container" id="tokens-${index}"></div>`;
             boardEl.appendChild(div);
         });
         updateTokens();
     }
-
-    function updateName(playerIndex, newName) {
-        if(newName.trim() === "") newName = `P${playerIndex + 1}`;
-        players[playerIndex].name = newName;
-        updateTokens(); 
-    }
-
-    function updateTokens() {
-        document.querySelectorAll(".token-container").forEach(el => el.innerHTML = "");
-        players.forEach(p => {
-            const container = document.getElementById(`tokens-${p.pos}`);
-            if (container) {
-                const token = document.createElement("div");
-                token.className = `token ${p.cssClass}`;
-                token.title = p.name; 
-                container.appendChild(token);
-            }
-        });
-    }
-
-    function resetGame() {
-        if(!confirm("Reiniciar o jogo?")) return;
-        resetLogic();
-        updateTokens();
-    }
-
+    function updateName(playerIndex, newName) { if(newName.trim() === "") newName = `P${playerIndex + 1}`; players[playerIndex].name = newName; updateTokens(); }
+    function updateTokens() { document.querySelectorAll(".token-container").forEach(el => el.innerHTML = ""); players.forEach(p => { const container = document.getElementById(`tokens-${p.pos}`); if (container) { const token = document.createElement("div"); token.className = `token ${p.cssClass}`; token.title = p.name; container.appendChild(token); } }); }
+    function resetGame() { if(!confirm("Reiniciar o jogo?")) return; resetLogic(); updateTokens(); }
+    
+    // --- LÓGICA DE REINÍCIO ATUALIZADA ---
     function resetLogic() {
         players.forEach(p => p.pos = 0);
         currentPlayerIndex = 0;
         isAnimating = false;
+        
         rollBtn.disabled = false;
+        rollBtn.innerText = "ROLAR";
+        rollBtn.onclick = playTurn;
+        rollBtn.style.backgroundColor = "#3742fa"; 
+        
         visualDice.innerText = "🎲";
+        visualDice.onclick = playTurn;
+        visualDice.style.cursor = "pointer";
+        
         messageBox.style.backgroundColor = "#fff3cd";
         messageBox.style.color = "#856404";
         messageBox.innerHTML = "Clique no dado para começar!";
         updateActiveTurnUI();
     }
 
-    function updateActiveTurnUI() {
-        players.forEach((p, index) => {
-            const wrapper = document.getElementById(`wrapper-${index}`);
-            if (index === currentPlayerIndex) {
-                wrapper.classList.add("active-turn");
-            } else {
-                wrapper.classList.remove("active-turn");
-            }
-        });
-    }
-
+    function updateActiveTurnUI() { players.forEach((p, index) => { const wrapper = document.getElementById(`wrapper-${index}`); if (index === currentPlayerIndex) { wrapper.classList.add("active-turn"); } else { wrapper.classList.remove("active-turn"); } }); }
     function playTurn() {
-        if (isAnimating) return;
-        isAnimating = true;
-        rollBtn.disabled = true;
-
-        const player = players[currentPlayerIndex];
-        messageBox.innerHTML = `🎲 Rolando para <strong>${player.name}</strong>...`;
-        
-        visualDice.classList.add("shaking");
-        
-        let rollInterval = setInterval(() => {
-            visualDice.innerText = Math.floor(Math.random() * 6) + 1;
-        }, 80); 
-
-        setTimeout(() => {
-            clearInterval(rollInterval);
-            visualDice.classList.remove("shaking");
-            
-            const dice = Math.floor(Math.random() * 6) + 1;
-            visualDice.innerText = dice;
-            messageBox.innerHTML = `🎲 ${player.name} tirou <strong>${dice}</strong>!`;
-
-            setTimeout(() => { processMove(player, dice); }, 500);
-        }, 1000);
+        if (isAnimating) return; isAnimating = true; rollBtn.disabled = true;
+        const player = players[currentPlayerIndex]; messageBox.innerHTML = `🎲 Rolando para <strong>${player.name}</strong>...`; visualDice.classList.add("shaking");
+        let rollInterval = setInterval(() => { visualDice.innerText = Math.floor(Math.random() * 6) + 1; }, 80);
+        setTimeout(() => { clearInterval(rollInterval); visualDice.classList.remove("shaking"); const dice = Math.floor(Math.random() * 6) + 1; visualDice.innerText = dice; messageBox.innerHTML = `🎲 ${player.name} tirou <strong>${dice}</strong>!`; setTimeout(() => { processMove(player, dice); }, 500); }, 1000);
     }
-
-    function processMove(player, dice) {
-        let newPos = player.pos + dice;
-        const lastIndex = currentSpaces.length - 1; 
-        if (newPos >= lastIndex) {
-            player.pos = lastIndex;
-            updateTokens();
-            finishGame(player);
-        } else {
-            movePlayer(player, newPos);
-        }
-    }
-
+    function processMove(player, dice) { let newPos = player.pos + dice; const lastIndex = currentSpaces.length - 1; if (newPos >= lastIndex) { player.pos = lastIndex; updateTokens(); finishGame(player); } else { movePlayer(player, newPos); } }
     function movePlayer(player, targetPos) {
-        player.pos = targetPos;
-        updateTokens();
-        
-        const space = currentSpaces[targetPos];
-
-        if (space.type === "move") {
-            messageBox.innerHTML += `<br>🚀 Casa Especial! ${space.text}`;
-            setTimeout(() => {
-                let jumpPos = player.pos + space.val;
-                if (jumpPos < 0) jumpPos = 0;
-                movePlayer(player, jumpPos); 
-            }, 1000);
-            return; 
-        } 
-        else if (space.type === "trade") {
-            const opponents = players.filter(p => p.id !== player.id);
-            const target = opponents[Math.floor(Math.random() * opponents.length)];
-            messageBox.innerHTML += `<br>🔄 TROCA COM: <strong>${target.name}</strong>!`;
-            
-            setTimeout(() => {
-                const tempPos = player.pos;
-                player.pos = target.pos;
-                target.pos = tempPos;
-                updateTokens();
-                const newSpace = currentSpaces[player.pos];
-                endTurn(player, newSpace);
-            }, 1500);
-            return;
-        }
-
+        player.pos = targetPos; updateTokens(); const space = currentSpaces[targetPos];
+        if (space.type === "move") { messageBox.innerHTML += `<br>🚀 Casa Especial! ${space.text}`; setTimeout(() => { let jumpPos = player.pos + space.val; if (jumpPos < 0) jumpPos = 0; movePlayer(player, jumpPos); }, 1000); return; }
+        else if (space.type === "trade") { const opponents = players.filter(p => p.id !== player.id); const target = opponents[Math.floor(Math.random() * opponents.length)]; messageBox.innerHTML += `<br>🔄 TROCA COM: <strong>${target.name}</strong>!`; setTimeout(() => { const tempPos = player.pos; player.pos = target.pos; target.pos = tempPos; updateTokens(); const newSpace = currentSpaces[player.pos]; endTurn(player, newSpace); }, 1500); return; }
         endTurn(player, space);
     }
-
     function endTurn(player, space) {
         if (space.type !== "start" && space.type !== "finish") {
-            let instructionText = currentInstruction.replace("[item]", space.text.toLowerCase())
-                                                    .replace("[action]", space.text.toLowerCase())
-                                                    .replace("[verb]", space.text.toLowerCase())
-                                                    .replace("[sentence]", space.text.toLowerCase())
-                                                    .replace("[topic]", space.text.toLowerCase())
-                                                    .replace("[have context]", "<span style='text-decoration: underline'>have + p.p.</span>");
-            
-            messageBox.innerHTML = `
-                <strong>${player.name}</strong>: <span style="color:#d63031;">${space.text}</span><br>
-                <span class="instruction">${instructionText}</span>
-            `;
+            let instructionText = currentInstruction.replace("[item]", space.text.toLowerCase()).replace("[action]", space.text.toLowerCase()).replace("[verb]", space.text.toLowerCase()).replace("[sentence]", space.text.toLowerCase()).replace("[topic]", space.text.toLowerCase()).replace("[have context]", "<span style='text-decoration: underline'>have + p.p.</span>");
+            messageBox.innerHTML = `<strong>${player.name}</strong>: <span style="color:#d63031;">${space.text}</span><br><span class="instruction">${instructionText}</span>`;
         }
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-        updateActiveTurnUI();
-        isAnimating = false;
-        rollBtn.disabled = false;
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.length; updateActiveTurnUI(); isAnimating = false; rollBtn.disabled = false;
     }
 
+    // --- LÓGICA DE VITÓRIA ATUALIZADA ---
     function finishGame(winner) {
         winner.pos = currentSpaces.length - 1;
         updateTokens();
+        
         messageBox.innerHTML = `🎉 <strong>${winner.name} VENCEU!</strong> 🎉`;
         messageBox.style.backgroundColor = "#d1e7dd";
         messageBox.style.color = "#0f5132";
-        rollBtn.style.display = "none";
-        visualDice.style.display = "none";
+        
+        // TRANSFORMA O BOTÃO EM "JOGAR DE NOVO"
+        rollBtn.innerText = "JOGAR DE NOVO";
+        rollBtn.onclick = resetGame; 
+        rollBtn.style.backgroundColor = "#2ed573"; 
+        rollBtn.disabled = false; 
+
+        // DADO TAMBÉM REINICIA
+        visualDice.style.display = "flex"; 
+        visualDice.style.cursor = "pointer";
+        visualDice.onclick = resetGame;
+
         isAnimating = false;
     }
-
 </script>
 </body>
 </html>
