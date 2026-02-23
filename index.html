@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Jogos de tabuleiro online gratuitos para aprender inglês (ESL). Pratique conversação, gramática (Simple Past, Present Perfect) e vocabulário de forma divertida.">
+    <meta name="description" content="Jogos de tabuleiro online gratuitos para aprender inglês (ESL). Pratique conversação, gramática (Simple Past, Present Perfect, Present Continuous) e vocabulário.">
     <title>Your Language Studio - ESL Board Games</title>
     <link rel="icon" type="image/jpg" href="logo.png">
 
@@ -59,22 +59,19 @@
         .menu-card p { color: #747d8c; font-size: 0.85em; }
         .menu-icon { font-size: 2.5em; margin-bottom: 10px; display: block; }
 
-        /* --- SEO CONTENT (ESSENCIAL PARA O ADSENSE) --- */
+        /* --- SEO CONTENT (TEXTO PARA O ADSENSE APROVAR) --- */
         .seo-content {
-            margin-top: 50px;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            max-width: 800px;
-            color: #57606f;
-            line-height: 1.6;
+            margin-top: 50px; background: white; padding: 40px; border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); max-width: 900px; width: 90%;
+            color: #2f3542; line-height: 1.8; text-align: left; margin-bottom: 50px;
         }
-        .seo-content h2 { color: #3742fa; font-size: 1.5em; margin-bottom: 15px; }
-        .seo-content h3 { color: #2f3542; font-size: 1.2em; margin-top: 20px; margin-bottom: 10px; }
-        .seo-content p { margin-bottom: 10px; }
-        .seo-content ul { padding-left: 20px; }
-        .seo-content li { margin-bottom: 5px; }
+        .seo-content h2 { color: #3742fa; font-size: 1.8em; margin-bottom: 20px; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px;}
+        .seo-content h3 { color: #ffa502; font-size: 1.4em; margin-top: 30px; margin-bottom: 15px; }
+        .seo-content p { margin-bottom: 15px; font-size: 1.05em; }
+        .seo-content ul { padding-left: 20px; margin-bottom: 20px; }
+        .seo-content li { margin-bottom: 8px; font-size: 1.05em;}
+        .grammar-box { background-color: #f8f9fa; border-left: 4px solid #3742fa; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0;}
+        .grammar-box code { font-family: monospace; font-size: 1.1em; color: #ff4757; }
 
         /* --- INSTRUÇÕES --- */
         #instructions-view {
@@ -87,7 +84,7 @@
         #instructions-view ul { text-align: left; padding-left: 20px; }
         .mission-box { background-color: #f1f2f6; padding: 15px; border-left: 5px solid #2ed573; border-radius: 5px; margin: 20px 0; font-style: italic; }
 
-        /* --- ANÚNCIOS --- */
+        /* --- ANÚNCIOS (POPUP/INTERSTITIAL) --- */
         #ad-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.95); z-index: 2000;
@@ -99,12 +96,8 @@
             width: 90%; max-width: 350px;
         }
         .ad-content { 
-            width: 100%; 
-            min-height: 250px; 
-            background: #f8f9fa; 
-            display: flex; justify-content: center; align-items: center; 
-            margin-bottom: 15px; 
-            overflow: hidden; 
+            width: 100%; min-height: 250px; background: #f8f9fa; display: flex; justify-content: center; align-items: center; 
+            margin-bottom: 15px; overflow: hidden; 
         }
         .ad-timer { font-size: 1.2em; margin-bottom: 15px; font-weight: bold; color: #333; }
         .ad-close-btn {
@@ -170,8 +163,8 @@
 <body>
 
     <div id="menu-view">
-        <img src="logo.png" alt="Your Language Studio Logo" class="main-logo">
-        <p class="subtitle">Escolha um tabuleiro para jogar:</p>
+        <img src="logo.png" alt="Your Language Studio Logo" class="main-logo" onerror="this.style.display='none'">
+        <p class="subtitle">Escolha um tabuleiro para jogar e aprender inglês:</p>
         
         <div class="menu-controls">
             <div class="player-selector-container">
@@ -201,32 +194,52 @@
                 <span class="menu-icon">🧩</span> <h3>Context Challenge</h3> <p>Present Perfect.</p>
             </div>
             <div class="menu-card" onclick="prepareGame('conversation')">
-                <span class="menu-icon">💬</span> <h3>Conversation Master</h3> <p>Topics of Conversation.</p>
+                <span class="menu-icon">💬</span> <h3>Conversation Master</h3> <p>60 Casas.</p>
+            </div>
+            <div class="menu-card" onclick="prepareGame('present_continuous')">
+                <span class="menu-icon">❓</span> <h3>Make a Question</h3> <p>Present Continuous (50 casas).</p>
             </div>
         </div>
 
         <div class="seo-content">
-            <h2>Sobre a Plataforma de Jogos Your Language Studio</h2>
-            <p>Your Language Studio é uma plataforma interativa e gratuita dedicada ao ensino de inglês como segunda língua (ESL). Nossos jogos de tabuleiro digitais são projetados para professores e estudantes que buscam uma maneira dinâmica de praticar conversação, gramática e vocabulário.</p>
+            <h2>Guia Rápido de Gramática (ESL) e Aprendizado Ativo</h2>
+            <p>Bem-vindo ao <strong>Your Language Studio</strong>, a sua plataforma gratuita de gamificação para o ensino da língua inglesa. Aprender inglês não precisa ser entediante. Nossos jogos de tabuleiro interativos foram criados para estimular a conversação (Speaking) e fixar regras gramaticais através da repetição ativa.</p>
             
-            <h3>Benefícios Educacionais</h3>
-            <ul>
-                <li><strong>Interatividade:</strong> Diferente de exercícios estáticos, nossos jogos incentivam a fala ativa e a interação entre os participantes.</li>
-                <li><strong>Flexibilidade:</strong> Jogue em grupos de 2 a 6 pessoas, ideal para salas de aula, aulas particulares ou grupos de estudo.</li>
-                <li><strong>Variedade de Temas:</strong> Cobrimos tópicos essenciais como rotinas diárias (Present Simple), passado (Verbos Irregulares), e debates complexos (Conversation Master).</li>
-            </ul>
+            <h3>1. Present Simple (Rotinas Diárias)</h3>
+            <p>Usamos o Present Simple para falar sobre hábitos, verdades universais e rotinas. No jogo <em>Daily Routine</em>, você praticará a construção de frases como:</p>
+            <div class="grammar-box">
+                <code>I <strong>wake up</strong> at 7 AM.</code><br>
+                <code>She <strong>goes</strong> to work by bus.</code>
+            </div>
 
-            <h3>Tópicos Abordados nos Jogos</h3>
-            <p>Cada tabuleiro foca em uma competência específica da língua inglesa:</p>
+            <h3>2. Simple Past (Verbos Irregulares)</h3>
+            <p>Um dos maiores desafios no aprendizado do inglês é memorizar os verbos irregulares. No tabuleiro <em>Irregular Verbs</em>, o aluno é desafiado a lembrar a forma no passado sob pressão do jogo, acelerando a memorização.</p>
+            <div class="grammar-box">
+                <code>Go ➔ <strong>Went</strong></code> | <code>See ➔ <strong>Saw</strong></code> | <code>Buy ➔ <strong>Bought</strong></code>
+            </div>
+
+            <h3>3. Present Perfect (Context Challenge)</h3>
+            <p>O Present Perfect conecta o passado com o presente. O nosso <em>Context Challenge</em> obriga o aluno a pensar em uma ação que acabou de acontecer para justificar um resultado no presente.</p>
+            <div class="grammar-box">
+                Situação: <em>I missed the bus.</em><br>
+                Contexto criado: <code>I <strong>have woken up</strong> late, so I missed the bus.</code>
+            </div>
+
+            <h3>4. Present Continuous (Formando Perguntas)</h3>
+            <p>O tabuleiro <em>Make a Question</em> foca na inversão do verbo "To Be" para formar perguntas sobre ações que estão acontecendo no momento da fala.</p>
+            <div class="grammar-box">
+                Afirmativa: <em>She is eating an apple.</em><br>
+                Pergunta: <code><strong>Is she</strong> eating an apple?</code>
+            </div>
+
+            <h3>Por que usar jogos em sala de aula?</h3>
             <ul>
-                <li><strong>Favorites:</strong> Vocabulário básico e construção de preferências.</li>
-                <li><strong>Daily Routine:</strong> Estruturação de frases no presente e horários.</li>
-                <li><strong>Irregular Verbs:</strong> Memorização e uso correto do Simple Past.</li>
-                <li><strong>Context Challenge:</strong> Uso avançado do Present Perfect para explicar situações.</li>
+                <li><strong>Redução da Ansiedade:</strong> Alunos ficam mais confortáveis para errar e tentar de novo durante uma brincadeira.</li>
+                <li><strong>Engajamento:</strong> O elemento de competição saudável mantém o foco no exercício.</li>
+                <li><strong>Prática Oral:</strong> Todos os jogos exigem que a resposta seja dita em voz alta, usando frases completas.</li>
             </ul>
-            <p>Transforme suas aulas de inglês e sessões de estudo com a metodologia de gamificação do Your Language Studio. É grátis, não requer login e está pronto para jogar.</p>
         </div>
-        </div>
+    </div>
 
     <div id="instructions-view">
         <button class="back-btn" onclick="hideInstructions()" style="align-self: flex-start;">⬅ Voltar ao Menu</button>
@@ -237,7 +250,7 @@
             <li><strong>Escolha seu Desafio:</strong> Selecione um dos tabuleiros temáticos.</li>
             <li><strong>Defina os Jogadores:</strong> Escolha quantos amigos vão jogar (2 a 6).</li>
             <li><strong>Role o Dado:</strong> Clique no dado ou no botão "ROLAR".</li>
-            <li><strong>Cumpra a Missão:</strong> Complete a frase ou responda a pergunta da casa.</li>
+            <li><strong>Cumpra a Missão:</strong> Complete a frase ou responda a pergunta da casa em voz alta.</li>
             <li><strong>Vitória:</strong> O primeiro a chegar no "FINISH" vence!</li>
         </ul>
     </div>
@@ -255,9 +268,7 @@
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
-            
             <div style="font-size: 0.8em; color: #ccc; margin-bottom: 10px;">Publicidade</div>
-
             <div class="ad-timer" id="adTimer">O jogo começa em 5s...</div>
             <button class="ad-close-btn" id="adCloseBtn" onclick="closeAdAndPlay()">JOGAR AGORA! 🚀</button>
         </div>
@@ -314,13 +325,15 @@
         if (pendingGameId) loadGame(pendingGameId);
     }
 
-    // --- DADOS ---
+    // --- BANCO DE DADOS DOS TABULEIROS ---
     const boardDatabase = {
         favorites: { title: "Favorites!", subtitle: "Say your favorite.", instruction: "My favorite [item] is...", spaces: [ {text:"START",type:"start"},{text:"Color",type:"standard"},{text:"Season",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Actor",type:"standard"},{text:"Candy",type:"standard"},{text:"Singer",type:"standard"},{text:"Day of the Week",type:"standard"},{text:"Meat",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Vegetable",type:"standard"},{text:"Fruit",type:"standard"},{text:"Fast Food",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"TV Show",type:"standard"},{text:"Book",type:"standard"},{text:"Time of Day",type:"standard"},{text:"Job",type:"standard"},{text:"Hobbie",type:"standard"},{text:"Class in School",type:"standard"},{text:"Movie",type:"standard"},{text:"Country",type:"standard"},{text:"Theme Park",type:"standard"},{text:"Dessert",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Drink",type:"standard"},{text:"Ice Cream Flavor",type:"standard"},{text:"Food",type:"standard"},{text:"Shoe Brand",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"City",type:"standard"},{text:"Sport",type:"standard"},{text:"Holiday",type:"standard"},{text:"Game",type:"standard"},{text:"Pet",type:"standard"},{text:"Word",type:"standard"},{text:"Music",type:"standard"},{text:"Feeling",type:"standard"},{text:"Animal",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Adjective",type:"standard"},{text:"Name",type:"standard"},{text:"FINISH",type:"finish"} ]},
         routine: { title: "Daily Routine", subtitle: "Present Simple", instruction: "I usually [action]...", spaces: [ {text:"START",type:"start"},{text:"Wake up",type:"standard"},{text:"Eat breakfast",type:"standard"},{text:"Brush teeth",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Go to school/work",type:"standard"},{text:"Take a shower",type:"standard"},{text:"Get dressed",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Have lunch",type:"standard"},{text:"Study",type:"standard"},{text:"Play games",type:"standard"},{text:"Watch TV",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Cook dinner",type:"standard"},{text:"Read a book",type:"standard"},{text:"Clean the room",type:"standard"},{text:"Go to bed",type:"standard"},{text:"Exercise",type:"standard"},{text:"Use the phone",type:"standard"},{text:"Walk the dog",type:"standard"},{text:"Wash dishes",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Relax",type:"standard"},{text:"FINISH",type:"finish"} ]},
         verbs: { title: "Irregular Verbs", subtitle: "Past Simple", instruction: "The past of [verb] is...", spaces: [ {text:"START",type:"start"},{text:"Go",type:"standard"},{text:"See",type:"standard"},{text:"Eat",type:"standard"},{text:"Drink",type:"standard"},{text:"Run",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Buy",type:"standard"},{text:"Think",type:"standard"},{text:"Sleep",type:"standard"},{text:"Speak",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Write",type:"standard"},{text:"Read",type:"standard"},{text:"Swim",type:"standard"},{text:"Drive",type:"standard"},{text:"Make",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Do",type:"standard"},{text:"Have",type:"standard"},{text:"Give",type:"standard"},{text:"Take",type:"standard"},{text:"Know",type:"standard"},{text:"Sing",type:"standard"},{text:"Fly",type:"standard"},{text:"Come",type:"standard"},{text:"Get",type:"standard"},{text:"FINISH",type:"finish"} ]},
         pp_context: { title: "Context Challenge", subtitle: "Present Perfect", instruction: "I [have context], so [sentence].", spaces: [ {text:"START",type:"start"},{text:"I missed the bus",type:"standard"},{text:"She bought a car",type:"standard"},{text:"They sold the house",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I lost my wallet",type:"standard"},{text:"He broke his leg",type:"standard"},{text:"We ate pizza",type:"standard"},{text:"She cried",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"The dog barked",type:"standard"},{text:"I forgot the answer",type:"standard"},{text:"They arrived late",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"He went to the doctor",type:"standard"},{text:"I slept all day",type:"standard"},{text:"We watched a movie",type:"standard"},{text:"She quit her job",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"I drank water",type:"standard"},{text:"They called the police",type:"standard"},{text:"He failed the test",type:"standard"},{text:"I took a shower",type:"standard"},{text:"We cleaned the room",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"She wrote a letter",type:"standard"},{text:"I visited my mom",type:"standard"},{text:"He bought flowers",type:"standard"},{text:"We ran away",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I found 10 dollars",type:"standard"},{text:"FINISH",type:"finish"} ]},
-        conversation: { title: "Conversation Master", subtitle: "Talk for 1 minute!", instruction: "Let's talk about [topic]...", spaces: [ {text:"START",type:"start"},{text:"Dream Job",type:"standard"},{text:"Favorite Movie",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Best Friend",type:"standard"},{text:"Worst Habit",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Hobbies",type:"standard"},{text:"Rainy Day",type:"standard"},{text:"Biggest Fear",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Favorite Season",type:"standard"},{text:"Role Model",type:"standard"},{text:"Social Media",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Superpower",type:"standard"},{text:"Aliens",type:"standard"},{text:"Favorite Food",type:"standard"},{text:"Money or Fame",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Best Vacation",type:"standard"},{text:"Happiness",type:"standard"},{text:"Shopping",type:"standard"},{text:"GO AHEAD 4",type:"move",val:4},{text:"Technology",type:"standard"},{text:"Cooking",type:"standard"},{text:"Future Plans",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Favorite Animal",type:"standard"},{text:"Childhood",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Sports",type:"standard"},{text:"Music Taste",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Book or Movie",type:"standard"},{text:"Morning/Night",type:"standard"},{text:"Stress Relief",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Perfect Date",type:"standard"},{text:"Lottery Win",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Climate Change",type:"standard"},{text:"Learning English",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Video Games",type:"standard"},{text:"Holidays",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Guilty Pleasure",type:"standard"},{text:"Best Advice",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Hidden Talent",type:"standard"},{text:"A Lie You Told",type:"standard"},{text:"GO BACK 5",type:"move",val:-5},{text:"3 Wishes",type:"standard"},{text:"Embarrassing Moment",type:"standard"},{text:"Proud Moment",type:"standard"},{text:"Phobias",type:"standard"},{text:"Ideal House",type:"standard"},{text:"FINISH",type:"finish"} ]}
+        conversation: { title: "Conversation Master", subtitle: "Talk for 1 minute!", instruction: "Let's talk about [topic]...", spaces: [ {text:"START",type:"start"},{text:"Dream Job",type:"standard"},{text:"Favorite Movie",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Best Friend",type:"standard"},{text:"Worst Habit",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Hobbies",type:"standard"},{text:"Rainy Day",type:"standard"},{text:"Biggest Fear",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Favorite Season",type:"standard"},{text:"Role Model",type:"standard"},{text:"Social Media",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Superpower",type:"standard"},{text:"Aliens",type:"standard"},{text:"Favorite Food",type:"standard"},{text:"Money or Fame",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Best Vacation",type:"standard"},{text:"Happiness",type:"standard"},{text:"Shopping",type:"standard"},{text:"GO AHEAD 4",type:"move",val:4},{text:"Technology",type:"standard"},{text:"Cooking",type:"standard"},{text:"Future Plans",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Favorite Animal",type:"standard"},{text:"Childhood",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Sports",type:"standard"},{text:"Music Taste",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Book or Movie",type:"standard"},{text:"Morning/Night",type:"standard"},{text:"Stress Relief",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Perfect Date",type:"standard"},{text:"Lottery Win",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Climate Change",type:"standard"},{text:"Learning English",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Video Games",type:"standard"},{text:"Holidays",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Guilty Pleasure",type:"standard"},{text:"Best Advice",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Hidden Talent",type:"standard"},{text:"A Lie You Told",type:"standard"},{text:"GO BACK 5",type:"move",val:-5},{text:"3 Wishes",type:"standard"},{text:"Embarrassing Moment",type:"standard"},{text:"Proud Moment",type:"standard"},{text:"Phobias",type:"standard"},{text:"Ideal House",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        // NOVO JOGO AQUI (50 CASAS)
+        present_continuous: { title: "Make a Question", subtitle: "Transform into a question!", instruction: "Question: [sentence]?", spaces: [ {text:"START",type:"start"},{text:"She is sleeping",type:"standard"},{text:"They are watching TV",type:"standard"},{text:"He is reading a book",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I am listening to music",type:"standard"},{text:"We are learning English",type:"standard"},{text:"The dog is barking",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"It is raining",type:"standard"},{text:"She is driving to work",type:"standard"},{text:"They are playing soccer",type:"standard"},{text:"He is cooking dinner",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I am writing an email",type:"standard"},{text:"We are waiting for the bus",type:"standard"},{text:"The baby is crying",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"She is drinking coffee",type:"standard"},{text:"They are talking loudly",type:"standard"},{text:"He is running in the park",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"I am studying for a test",type:"standard"},{text:"We are eating pizza",type:"standard"},{text:"The sun is shining",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"She is working late",type:"standard"},{text:"They are dancing",type:"standard"},{text:"He is taking a shower",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I am fixing the car",type:"standard"},{text:"We are cleaning the house",type:"standard"},{text:"The cat is sleeping",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"She is singing a song",type:"standard"},{text:"They are traveling to London",type:"standard"},{text:"He is buying groceries",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I am making a cake",type:"standard"},{text:"We are laughing",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"The teacher is speaking",type:"standard"},{text:"She is typing a letter",type:"standard"},{text:"They are building a wall",type:"standard"},{text:"He is painting the room",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I am feeling happy",type:"standard"},{text:"We are going home",type:"standard"},{text:"The birds are flying",type:"standard"},{text:"FINISH",type:"finish"} ]}
     };
 
     let currentSpaces = []; let currentInstruction = ""; let players = []; let currentPlayerIndex = 0; let isAnimating = false;
@@ -335,6 +348,7 @@
         const numPlayers = parseInt(playerCountSelect.value); setupPlayers(numPlayers);
         resetLogic();
         menuView.style.display = "none"; instructionsView.style.display = "none"; gameView.style.display = "flex";
+        window.scrollTo(0, 0); // Sobe a página ao iniciar
         initBoard();
     }
 
@@ -365,7 +379,6 @@
     function updateTokens() { document.querySelectorAll(".token-container").forEach(el => el.innerHTML = ""); players.forEach(p => { const container = document.getElementById(`tokens-${p.pos}`); if (container) { const token = document.createElement("div"); token.className = `token ${p.cssClass}`; token.title = p.name; container.appendChild(token); } }); }
     function resetGame() { if(!confirm("Reiniciar o jogo?")) return; resetLogic(); updateTokens(); }
     
-    // --- LÓGICA DE REINÍCIO ATUALIZADA ---
     function resetLogic() {
         players.forEach(p => p.pos = 0);
         currentPlayerIndex = 0;
@@ -408,29 +421,15 @@
         currentPlayerIndex = (currentPlayerIndex + 1) % players.length; updateActiveTurnUI(); isAnimating = false; rollBtn.disabled = false;
     }
 
-    // --- LÓGICA DE VITÓRIA ATUALIZADA ---
     function finishGame(winner) {
         winner.pos = currentSpaces.length - 1;
         updateTokens();
-        
         messageBox.innerHTML = `🎉 <strong>${winner.name} VENCEU!</strong> 🎉`;
-        messageBox.style.backgroundColor = "#d1e7dd";
-        messageBox.style.color = "#0f5132";
-        
-        // TRANSFORMA O BOTÃO EM "JOGAR DE NOVO"
-        rollBtn.innerText = "JOGAR DE NOVO";
-        rollBtn.onclick = resetGame; 
-        rollBtn.style.backgroundColor = "#2ed573"; 
-        rollBtn.disabled = false; 
-
-        // DADO TAMBÉM REINICIA
-        visualDice.style.display = "flex"; 
-        visualDice.style.cursor = "pointer";
-        visualDice.onclick = resetGame;
-
+        messageBox.style.backgroundColor = "#d1e7dd"; messageBox.style.color = "#0f5132";
+        rollBtn.innerText = "JOGAR DE NOVO"; rollBtn.onclick = resetGame; rollBtn.style.backgroundColor = "#2ed573"; rollBtn.disabled = false; 
+        visualDice.style.display = "flex"; visualDice.style.cursor = "pointer"; visualDice.onclick = resetGame;
         isAnimating = false;
     }
 </script>
 </body>
 </html>
-
