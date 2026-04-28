@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Jogos de tabuleiro online gratuitos para aprender inglês (ESL). Pratique conversação, gramática (Simple Past, Present Perfect, Present Continuous) e vocabulário.">
-    <title>Your Language Studio - ESL Board Games</title>
-    <link rel="icon" type="image/jpg" href="logo.png">
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2045943406111949"
-     crossorigin="anonymous"></script>
+    <meta name="description" content="Your Language Studio - Aulas de inglês personalizadas e jogos educativos online gratuitos.">
+    <title>Your Language Studio - English & Games</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2045943406111949" crossorigin="anonymous"></script>
     
     <style>
         :root {
@@ -16,138 +14,93 @@
             --p4-color: #ffa502; --p5-color: #a55eea; --p6-color: #00d2d3;
             --board-bg: #f0f2f5; --space-bg: #ffffff; --special-bg: #ffa502;
             --trade-bg: #747d8c; --menu-bg: #2f3542;
+            --primary-color: #3742fa; --text-color: #57606f; --light-bg: #dfe4ea;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #dfe4ea;
+            background-color: var(--light-bg);
+            color: var(--text-color);
             display: flex; flex-direction: column; align-items: center;
-            margin: 0; padding: 0; min-height: 100vh;
+            min-height: 100vh; overflow-x: hidden;
         }
 
-        /* --- MENU --- */
-        #menu-view {
-            display: flex; flex-direction: column; align-items: center;
-            width: 100%; max-width: 900px; padding: 20px;
-        }
-        .main-logo { max-width: 80%; height: auto; width: 350px; margin-bottom: 10px; display: block; }
-        p.subtitle { margin-top: 0; font-style: italic; color: #57606f; margin-bottom: 20px; text-align: center;}
+        .container { width: 100%; max-width: 1200px; padding: 0 20px; margin: 0 auto; }
 
-        .menu-controls { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; margin-bottom: 30px; }
-        .player-selector-container {
-            background: white; padding: 15px 30px; border-radius: 50px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 15px; border: 2px solid #3742fa;
-        }
+        /* --- HEADER E NAVEGAÇÃO --- */
+        header { background: white; width: 100%; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .header-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .header-flex h1 { color: var(--primary-color); font-size: 1.5em; margin: 0; }
+        nav { display: flex; gap: 15px; }
+        nav a { text-decoration: none; color: var(--text-color); font-weight: bold; transition: color 0.2s; }
+        nav a:hover { color: var(--primary-color); }
+
+        /* --- SEÇÕES DO SITE --- */
+        section { width: 100%; padding: 60px 0; display: flex; justify-content: center; }
+        .hero { background: linear-gradient(135deg, #3742fa, #5352ed); color: white; text-align: center; padding: 80px 20px; }
+        .hero h2 { font-size: 2.5em; margin-bottom: 15px; }
+        .hero p { font-size: 1.2em; max-width: 600px; margin: 0 auto 25px auto; line-height: 1.6; }
+        .btn { display: inline-block; background-color: #ffa502; color: white; padding: 12px 25px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1em; transition: transform 0.2s, background 0.2s; border: none; cursor: pointer; }
+        .btn:hover { transform: scale(1.05); background-color: #eccc68; }
+
+        .content-section h2 { color: var(--primary-color); font-size: 2em; margin-bottom: 20px; text-align: center; }
+        .content-section p { font-size: 1.1em; line-height: 1.8; margin-bottom: 15px; text-align: justify; }
+        .bg-white { background-color: white; }
+
+        .pricing-cards { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+        .card { background: var(--light-bg); padding: 30px; border-radius: 15px; text-align: center; width: 300px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .card h3 { color: var(--primary-color); margin-bottom: 10px; font-size: 1.5em; }
+        .card .price { font-size: 2em; font-weight: bold; color: #2f3542; margin-bottom: 10px; }
+        .card .price small { font-size: 0.4em; color: var(--text-color); }
+        .card .discount { color: #2ed573; font-weight: bold; margin-bottom: 10px; }
+
+        /* --- HUB DE JOGOS (DENTRO DA LANDING PAGE) --- */
+        #jogos { display: flex; flex-direction: column; align-items: center; width: 100%; }
+        .player-selector-container { background: white; padding: 15px 30px; border-radius: 50px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 15px; border: 2px solid var(--primary-color); margin-bottom: 30px; flex-wrap: wrap; justify-content: center; }
         .player-selector-container label { font-weight: bold; color: #2f3542; font-size: 1.1em; }
         .player-selector-container select { padding: 5px 10px; font-size: 1.1em; border-radius: 10px; border: 1px solid #ccc; cursor: pointer; }
+        
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; width: 100%; max-width: 1200px; padding: 10px; }
+        .menu-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border: 2px solid transparent; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .menu-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.15); border-color: var(--primary-color); }
+        .menu-card h3 { color: #2f3542; margin: 10px 0; font-size: 1.2em; }
+        .menu-card p { color: var(--text-color); font-size: 0.9em; }
+        .menu-icon { font-size: 3em; margin-bottom: 10px; display: block; }
 
-        .btn-instructions {
-            background-color: #ffa502; color: white; border: none; padding: 10px 20px;
-            border-radius: 25px; font-weight: bold; cursor: pointer; font-size: 1em;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s;
-        }
-        .btn-instructions:hover { transform: scale(1.05); background-color: #eccc68; }
+        footer { background: #2f3542; color: white; width: 100%; text-align: center; padding: 20px 0; margin-top: auto; }
 
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; width: 100%; padding: 10px; }
-        .menu-card {
-            background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border: 2px solid transparent;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-        }
-        .menu-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.15); border-color: #3742fa; }
-        .menu-card h3 { color: #2f3542; margin: 10px 0; font-size: 1.1em; }
-        .menu-card p { color: #747d8c; font-size: 0.85em; }
-        .menu-icon { font-size: 2.5em; margin-bottom: 10px; display: block; }
-
-        /* --- SEO CONTENT (TEXTO PARA O ADSENSE APROVAR) --- */
-        .seo-content {
-            margin-top: 50px; background: white; padding: 40px; border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); max-width: 900px; width: 90%;
-            color: #2f3542; line-height: 1.8; text-align: left; margin-bottom: 50px;
-        }
-        .seo-content h2 { color: #3742fa; font-size: 1.8em; margin-bottom: 20px; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px;}
-        .seo-content h3 { color: #ffa502; font-size: 1.4em; margin-top: 30px; margin-bottom: 15px; }
-        .seo-content p { margin-bottom: 15px; font-size: 1.05em; }
-        .seo-content ul { padding-left: 20px; margin-bottom: 20px; }
-        .seo-content li { margin-bottom: 8px; font-size: 1.05em;}
-        .grammar-box { background-color: #f8f9fa; border-left: 4px solid #3742fa; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0;}
-        .grammar-box code { font-family: monospace; font-size: 1.1em; color: #ff4757; }
-
-        /* --- INSTRUÇÕES --- */
-        #instructions-view {
-            display: none; flex-direction: column; align-items: center; width: 100%; max-width: 800px;
-            padding: 30px; background-color: white; margin-top: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        #instructions-view h2 { color: #3742fa; border-bottom: 2px solid #ffa502; padding-bottom: 10px; }
-        #instructions-view h3 { color: #2f3542; margin-top: 20px; }
-        #instructions-view p, #instructions-view li { color: #57606f; line-height: 1.6; font-size: 1.1em; }
-        #instructions-view ul { text-align: left; padding-left: 20px; }
-        .mission-box { background-color: #f1f2f6; padding: 15px; border-left: 5px solid #2ed573; border-radius: 5px; margin: 20px 0; font-style: italic; }
-
-        /* --- ANÚNCIOS (POPUP/INTERSTITIAL) --- */
-        #ad-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.95); z-index: 2000;
-            flex-direction: column; justify-content: center; align-items: center; color: white; backdrop-filter: blur(5px);
-        }
-        .ad-container {
-            background: white; padding: 15px; border-radius: 10px; display: flex; flex-direction: column;
-            align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-            width: 90%; max-width: 350px;
-        }
-        .ad-content { 
-            width: 100%; min-height: 250px; background: #f8f9fa; display: flex; justify-content: center; align-items: center; 
-            margin-bottom: 15px; overflow: hidden; 
-        }
+        /* --- TELA DE ANÚNCIOS (INTERSTITIAL) --- */
+        #ad-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); z-index: 3000; flex-direction: column; justify-content: center; align-items: center; color: white; backdrop-filter: blur(5px); }
+        .ad-container { background: white; padding: 15px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 90%; max-width: 350px; }
+        .ad-content { width: 100%; min-height: 250px; background: #f8f9fa; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; overflow: hidden; }
         .ad-timer { font-size: 1.2em; margin-bottom: 15px; font-weight: bold; color: #333; }
-        .ad-close-btn {
-            background: #2ed573; color: white; border: none; padding: 12px 30px; font-size: 18px;
-            border-radius: 25px; cursor: pointer; display: none; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: transform 0.1s;
-        }
+        .ad-close-btn { background: #2ed573; color: white; border: none; padding: 12px 30px; font-size: 18px; border-radius: 25px; cursor: pointer; display: none; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: transform 0.1s; }
         .ad-close-btn:hover { background: #26af61; transform: scale(1.05); }
 
-        /* --- JOGO --- */
-        #game-view { display: none; flex-direction: column; align-items: center; width: 100%; }
-        .game-header {
-            position: sticky; top: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 1000;
-            padding: 10px; display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid #ccc;
-        }
+        /* --- TELA DO JOGO DE TABULEIRO --- */
+        #game-view { display: none; flex-direction: column; align-items: center; width: 100%; min-height: 100vh; background-color: var(--light-bg); }
+        .game-header { position: sticky; top: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 1000; padding: 10px; display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid #ccc; }
         .header-top-row { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; margin-bottom: 5px; }
-        .back-btn { background: #747d8c; color: white; border: none; padding: 5px 12px; border-radius: 20px; cursor: pointer; font-size: 12px; }
+        .back-btn { background: #747d8c; color: white; border: none; padding: 5px 12px; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: bold; }
         .status-display { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; flex-grow: 1; margin: 0 10px; }
         .player-wrapper { padding: 5px 10px; border-radius: 10px; border: 2px solid transparent; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; background-color: #f1f2f6; min-width: 80px; }
         .player-name-input { border: none; background: transparent; font-size: 1em; font-weight: bold; text-align: center; width: 90px; padding: 2px; border-bottom: 1px dashed #ccc; cursor: text; }
-        .player-name-input:focus { outline: none; border-bottom: 2px solid #3742fa; }
-        .active-turn { background-color: #fff; border-color: #3742fa; box-shadow: 0 0 10px rgba(55, 66, 250, 0.3); transform: scale(1.05); }
+        .player-name-input:focus { outline: none; border-bottom: 2px solid var(--primary-color); }
+        .active-turn { background-color: #fff; border-color: var(--primary-color); box-shadow: 0 0 10px rgba(55, 66, 250, 0.3); transform: scale(1.05); }
         #messageBox { width: 90%; max-width: 800px; background-color: #fff3cd; border: 2px solid #ffeeba; border-radius: 8px; padding: 10px 20px; color: #856404; text-align: center; font-size: 1.2em; line-height: 1.3; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
-        .floating-controls {
-            position: fixed; bottom: 15px; left: 15px; background: rgba(255, 255, 255, 0.95);
-            padding: 8px; border-radius: 12px; box-shadow: 0 5px 10px rgba(0,0,0,0.2); z-index: 1000;
-            display: flex; flex-direction: column; align-items: center; gap: 5px; border: 2px solid #3742fa; width: 70px;
-        }
+        .floating-controls { position: fixed; bottom: 15px; left: 15px; background: rgba(255, 255, 255, 0.95); padding: 8px; border-radius: 12px; box-shadow: 0 5px 10px rgba(0,0,0,0.2); z-index: 1000; display: flex; flex-direction: column; align-items: center; gap: 5px; border: 2px solid var(--primary-color); width: 70px; }
         .dice-container { perspective: 1000px; }
-        #visualDice {
-            font-size: 28px; width: 50px; height: 50px;
-            background-color: white; border: 2px solid #3742fa;
-            border-radius: 10px; display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold; color: #3742fa;
-            cursor: pointer; user-select: none; transition: transform 0.2s;
-        }
+        #visualDice { font-size: 28px; width: 50px; height: 50px; background-color: white; border: 2px solid var(--primary-color); border-radius: 10px; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold; color: var(--primary-color); cursor: pointer; user-select: none; transition: transform 0.2s; }
         .shaking { animation: shake 0.5s infinite; background-color: #fffae6 !important; color: #ffa502 !important; border-color: #ffa502 !important; }
         @keyframes shake { 0% { transform: translate(1px, 1px) rotate(0deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 40% { transform: translate(1px, -1px) rotate(1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 80% { transform: translate(-1px, -1px) rotate(1deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
-        
         button.action-btn { border: none; padding: 5px 8px; font-size: 11px; border-radius: 10px; cursor: pointer; transition: transform 0.1s; width: 100%; font-weight: bold; }
-        #rollBtn { background-color: #3742fa; color: white; font-size: 12px; box-shadow: 0 2px 3px rgba(55, 66, 250, 0.3); }
+        #rollBtn { background-color: var(--primary-color); color: white; font-size: 12px; box-shadow: 0 2px 3px rgba(55, 66, 250, 0.3); }
         #resetBtn { background-color: transparent; color: #95a5a6; font-size: 9px; border: 1px solid #dfe6e9; padding: 2px; font-weight: normal; }
-        #resetBtn:hover { background-color: #dfe6e9; color: #d63031; }
-        button.action-btn:active { transform: scale(0.95); }
-        button.action-btn:disabled { background-color: #ccc; cursor: not-allowed; }
-
-        .board { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; width: 95%; max-width: 1200px; margin-top: 20px; padding-bottom: 50px; }
+        .board { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; width: 95%; max-width: 1200px; margin-top: 20px; padding-bottom: 80px; }
         .space { background-color: var(--space-bg); border: 2px solid #ced6e0; border-radius: 10px; padding: 15px; min-height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; font-size: 1.1em; font-weight: 500; transition: transform 0.2s; }
-        .space:hover { transform: scale(1.02); box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 5; }
         .space.special { background-color: #ffeaa7; border-color: var(--special-bg); }
         .space.trade { background-color: #dfe4ea; border-color: var(--trade-bg); }
         .space.start { background-color: #a4b0be; color: white; }
@@ -155,104 +108,142 @@
         .number { position: absolute; top: 5px; left: 8px; font-size: 12px; color: #999; }
         .token { width: 22px; height: 22px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3); transition: all 0.5s ease; }
         .token-container { display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap; justify-content: center; }
-        .p1-color { color: #ff4757; } .p2-color { color: #2ed573; } .p3-color { color: #1e90ff; } .p4-color { color: #ffa502; } .p5-color { color: #a55eea; } .p6-color { color: #00d2d3; }
         .p1-token { background-color: #ff4757; } .p2-token { background-color: #2ed573; } .p3-token { background-color: #1e90ff; } .p4-token { background-color: #ffa502; } .p5-token { background-color: #a55eea; } .p6-token { background-color: #00d2d3; }
-        .instruction { font-weight: bold; color: #2f3542; margin-top: 5px; display: block; font-size: 1.1em; }
+        .p1-color { color: #ff4757; } .p2-color { color: #2ed573; } .p3-color { color: #1e90ff; } .p4-color { color: #ffa502; } .p5-color { color: #a55eea; } .p6-color { color: #00d2d3; }
+        .instruction { font-weight: bold; color: #2f3542; margin-top: 5px; display: block; font-size: 1em; }
     </style>
 </head>
 <body>
 
-    <div id="menu-view">
-        <img src="logo.png" alt="Your Language Studio Logo" class="main-logo" onerror="this.style.display='none'">
-        <p class="subtitle">Escolha um tabuleiro para jogar e aprender inglês:</p>
-        
-        <div class="menu-controls">
-            <div class="player-selector-container">
-                <label for="playerCount">👥 Número de Jogadores:</label>
-                <select id="playerCount">
-                    <option value="2">2 Jogadores</option>
-                    <option value="3">3 Jogadores</option>
-                    <option value="4">4 Jogadores</option>
-                    <option value="5">5 Jogadores</option>
-                    <option value="6">6 Jogadores</option>
-                </select>
+    <div id="website-view">
+        <header>
+            <div class="container header-flex">
+                <h1>Your Language Studio</h1>
+                <nav>
+                    <a href="#sobre">Sobre</a>
+                    <a href="#metodologia">Metodologia</a>
+                    <a href="#planos">Planos</a>
+                    <a href="#jogos">Jogos (Free)</a>
+                </nav>
             </div>
-            <button class="btn-instructions" onclick="showInstructions()">📖 Como funciona & Objetivo</button>
-        </div>
+        </header>
 
-        <div class="menu-grid">
-            <div class="menu-card" onclick="prepareGame('favorites')">
-                <span class="menu-icon">❤️</span> <h3>Favorites</h3> <p>Coisas favoritas.</p>
+        <section class="hero">
+            <div class="container">
+                <h2>Inglês leve, divertido e eficiente!</h2>
+                <p>Descubra como aprender inglês pode ser prazeroso, sem bloqueios e focado na comunicação que você realmente precisa no seu dia a dia.</p>
+                <a href="#jogos" class="btn">Testar Jogos Gratuitos</a>
             </div>
-            <div class="menu-card" onclick="prepareGame('routine')">
-                <span class="menu-icon">⏰</span> <h3>Daily Routine</h3> <p>Present Simple.</p>
-            </div>
-            <div class="menu-card" onclick="prepareGame('verbs')">
-                <span class="menu-icon">⚡</span> <h3>Irregular Verbs</h3> <p>Past Simple.</p>
-            </div>
-            <div class="menu-card" onclick="prepareGame('pp_context')">
-                <span class="menu-icon">🧩</span> <h3>Context Challenge</h3> <p>Present Perfect.</p>
-            </div>
-            <div class="menu-card" onclick="prepareGame('conversation')">
-                <span class="menu-icon">💬</span> <h3>Conversation Master</h3> <p>60 Casas.</p>
-            </div>
-            <div class="menu-card" onclick="prepareGame('present_continuous')">
-                <span class="menu-icon">❓</span> <h3>Make a Question</h3> <p>Present Continuous (50 casas).</p>
-            </div>
-        </div>
+        </section>
 
-        <div class="seo-content">
-            <h2>Guia Rápido de Gramática (ESL) e Aprendizado Ativo</h2>
-            <p>Bem-vindo ao <strong>Your Language Studio</strong>, a sua plataforma gratuita de gamificação para o ensino da língua inglesa. Aprender inglês não precisa ser entediante. Nossos jogos de tabuleiro interativos foram criados para estimular a conversação (Speaking) e fixar regras gramaticais através da repetição ativa.</p>
-            
-            <h3>1. Present Simple (Rotinas Diárias)</h3>
-            <p>Usamos o Present Simple para falar sobre hábitos, verdades universais e rotinas. No jogo <em>Daily Routine</em>, você praticará a construção de frases como:</p>
-            <div class="grammar-box">
-                <code>I <strong>wake up</strong> at 7 AM.</code><br>
-                <code>She <strong>goes</strong> to work by bus.</code>
+        <section id="sobre" class="content-section">
+            <div class="container">
+                <h2>Sobre a Your Language Studio</h2>
+                <p>A Your Language Studio (YLS) é uma escola de inglês e plataforma digital especializada em aulas personalizadas. Nosso foco está no desenvolvimento prático da conversação e na eliminação de bloqueios com o idioma. Valorizamos a prática real da língua, aplicando métodos que garantem que o aluno saiba não apenas o que dizer, mas como e por que está dizendo.</p>
             </div>
+        </section>
 
-            <h3>2. Simple Past (Verbos Irregulares)</h3>
-            <p>Um dos maiores desafios no aprendizado do inglês é memorizar os verbos irregulares. No tabuleiro <em>Irregular Verbs</em>, o aluno é desafiado a lembrar a forma no passado sob pressão do jogo, acelerando a memorização.</p>
-            <div class="grammar-box">
-                <code>Go ➔ <strong>Went</strong></code> | <code>See ➔ <strong>Saw</strong></code> | <code>Buy ➔ <strong>Bought</strong></code>
+        <section id="metodologia" class="content-section bg-white">
+            <div class="container">
+                <h2>Nossa Metodologia</h2>
+                <p>A metodologia da Your Language Studio é baseada na comunicação ativa. Utilizamos materiais dinâmicos, incluindo a gamificação através dos nossos exclusivos Board Games digitais, priorizando a conversação e situações reais. Empregamos técnicas práticas, como o método WHR (Why, How, Result) para estruturação lógica do pensamento em inglês e o ensino focado em homophones, que aprimoram a escuta e a fala natural.</p>
             </div>
+        </section>
 
-            <h3>3. Present Perfect (Context Challenge)</h3>
-            <p>O Present Perfect conecta o passado com o presente. O nosso <em>Context Challenge</em> obriga o aluno a pensar em uma ação que acabou de acontecer para justificar um resultado no presente.</p>
-            <div class="grammar-box">
-                Situação: <em>I missed the bus.</em><br>
-                Contexto criado: <code>I <strong>have woken up</strong> late, so I missed the bus.</code>
+        <section id="planos" class="content-section">
+            <div class="container">
+                <h2>Nossos Planos</h2>
+                <div class="pricing-cards">
+                    <div class="card">
+                        <h3>Plano Your</h3>
+                        <p>Acesso completo à metodologia YLS.</p>
+                        <div class="price">R$ 260<small>/mês</small></div>
+                    </div>
+                    <div class="card">
+                        <h3>Alunos AR Esportes</h3>
+                        <p>Parceria exclusiva para matriculados na AR Esportes.</p>
+                        <div class="discount">Desconto Especial!</div>
+                        <div class="price">R$ 225<small>/mês</small></div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <h3>4. Present Continuous (Formando Perguntas)</h3>
-            <p>O tabuleiro <em>Make a Question</em> foca na inversão do verbo "To Be" para formar perguntas sobre ações que estão acontecendo no momento da fala.</p>
-            <div class="grammar-box">
-                Afirmativa: <em>She is eating an apple.</em><br>
-                Pergunta: <code><strong>Is she</strong> eating an apple?</code>
+        <section id="jogos" class="content-section bg-white">
+            <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+                <h2>Hub de Jogos de Inglês (Free)</h2>
+                <p style="text-align: center; margin-bottom: 30px;">Selecione a quantidade de jogadores e escolha um desafio para praticar gramática e conversação agora mesmo!</p>
+                
+                <div class="player-selector-container">
+                    <label for="playerCount">👥 Jogadores:</label>
+                    <select id="playerCount">
+                        <option value="2">2 Jogadores</option>
+                        <option value="3">3 Jogadores</option>
+                        <option value="4">4 Jogadores</option>
+                        <option value="5">5 Jogadores</option>
+                        <option value="6">6 Jogadores</option>
+                    </select>
+                </div>
+
+                <div class="menu-grid">
+                    <div class="menu-card" onclick="prepareGame('favorites')">
+                        <span class="menu-icon">❤️</span> <h3>Favorites</h3> <p>Pratique vocabulário.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('routine')">
+                        <span class="menu-icon">⏰</span> <h3>Daily Routine</h3> <p>Present Simple.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('verbs')">
+                        <span class="menu-icon">⚡</span> <h3>Irregular Verbs</h3> <p>Past Simple.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('pp_context')">
+                        <span class="menu-icon">🧩</span> <h3>Context Challenge</h3> <p>Present Perfect.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('conversation')">
+                        <span class="menu-icon">💬</span> <h3>Conversation</h3> <p>60 Tópicos.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('present_continuous')">
+                        <span class="menu-icon">❓</span> <h3>Make a Question</h3> <p>Present Continuous.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('whr_method')">
+                        <span class="menu-icon">🧠</span> <h3>The WHR Method</h3> <p>Why, How, Result.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('homophones')">
+                        <span class="menu-icon">👂</span> <h3>Homophones</h3> <p>Palavras com mesmo som.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('future_plans')">
+                        <span class="menu-icon">🔮</span> <h3>Future Plans</h3> <p>Will vs Going To.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('conditionals')">
+                        <span class="menu-icon">🔀</span> <h3>Conditionals</h3> <p>If clauses.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('phrasal_verbs')">
+                        <span class="menu-icon">🔗</span> <h3>Phrasal Verbs</h3> <p>Verbos + Preposições.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('business')">
+                        <span class="menu-icon">💼</span> <h3>Business English</h3> <p>Vocabulário Corporativo.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('travel')">
+                        <span class="menu-icon">✈️</span> <h3>Travel & Airport</h3> <p>Vocabulário de Viagem.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('food')">
+                        <span class="menu-icon">🍳</span> <h3>Food & Cooking</h3> <p>Ingredientes e receitas.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('emotions')">
+                        <span class="menu-icon">🎭</span> <h3>Emotions</h3> <p>Adjetivos de sentimento.</p>
+                    </div>
+                    <div class="menu-card" onclick="prepareGame('advice')">
+                        <span class="menu-icon">💡</span> <h3>Give Advice</h3> <p>Should / Shouldn't.</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <h3>Por que usar jogos em sala de aula?</h3>
-            <ul>
-                <li><strong>Redução da Ansiedade:</strong> Alunos ficam mais confortáveis para errar e tentar de novo durante uma brincadeira.</li>
-                <li><strong>Engajamento:</strong> O elemento de competição saudável mantém o foco no exercício.</li>
-                <li><strong>Prática Oral:</strong> Todos os jogos exigem que a resposta seja dita em voz alta, usando frases completas.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div id="instructions-view">
-        <button class="back-btn" onclick="hideInstructions()" style="align-self: flex-start;">⬅ Voltar ao Menu</button>
-        <h2>Bem-vindo ao Your Language Studio!</h2>
-        <div class="mission-box">"Nosso objetivo é transformar o aprendizado de inglês em uma experiência leve, divertida e altamente interativa."</div>
-        <h3>📝 Como Jogar</h3>
-        <ul>
-            <li><strong>Escolha seu Desafio:</strong> Selecione um dos tabuleiros temáticos.</li>
-            <li><strong>Defina os Jogadores:</strong> Escolha quantos amigos vão jogar (2 a 6).</li>
-            <li><strong>Role o Dado:</strong> Clique no dado ou no botão "ROLAR".</li>
-            <li><strong>Cumpra a Missão:</strong> Complete a frase ou responda a pergunta da casa em voz alta.</li>
-            <li><strong>Vitória:</strong> O primeiro a chegar no "FINISH" vence!</li>
-        </ul>
+        <footer>
+            <div class="container">
+                <p>© 2026 Your Language Studio</p>
+                <p><small>Contato: yls.yourlanguage@gmail.com | Rua Júlia Lopes, 290 — Ponta Grossa/PR</small></p>
+            </div>
+        </footer>
     </div>
 
     <div id="ad-overlay">
@@ -269,7 +260,7 @@
                 </script>
             </div>
             <div style="font-size: 0.8em; color: #ccc; margin-bottom: 10px;">Publicidade</div>
-            <div class="ad-timer" id="adTimer">O jogo começa em 5s...</div>
+            <div class="ad-timer" id="adTimer">Carregando jogo em 5s...</div>
             <button class="ad-close-btn" id="adCloseBtn" onclick="closeAdAndPlay()">JOGAR AGORA! 🚀</button>
         </div>
     </div>
@@ -277,7 +268,7 @@
     <div id="game-view">
         <div class="game-header">
             <div class="header-top-row">
-                <button class="back-btn" onclick="backToMenu()">⬅ Menu</button>
+                <button class="back-btn" onclick="backToMenu()">⬅ Sair do Jogo</button>
                 <div class="status-display" id="players-area"></div>
             </div>
             <div id="messageBox">Edite os nomes acima e clique no dado para começar!</div>
@@ -295,8 +286,11 @@
     </div>
 
 <script>
-    // --- LÓGICA DE ANÚNCIOS ---
+    // --- LÓGICA DE TRANSIÇÃO E ANÚNCIOS ---
     let pendingGameId = null;
+    const websiteView = document.getElementById("website-view");
+    const gameView = document.getElementById("game-view");
+    
     function prepareGame(gameId) {
         pendingGameId = gameId;
         const overlay = document.getElementById('ad-overlay');
@@ -305,14 +299,13 @@
         
         overlay.style.display = 'flex';
         btn.style.display = 'none';
-        
         let timeLeft = 5; 
-        timerEl.innerText = `O jogo começa em ${timeLeft}s...`;
+        timerEl.innerText = `Carregando jogo em ${timeLeft}s...`;
 
         const countdown = setInterval(() => {
             timeLeft--;
             if (timeLeft > 0) {
-                timerEl.innerText = `O jogo começa em ${timeLeft}s...`;
+                timerEl.innerText = `Carregando jogo em ${timeLeft}s...`;
             } else {
                 clearInterval(countdown);
                 timerEl.innerText = "";
@@ -320,26 +313,43 @@
             }
         }, 1000);
     }
+
     function closeAdAndPlay() {
         document.getElementById('ad-overlay').style.display = 'none';
         if (pendingGameId) loadGame(pendingGameId);
     }
 
-    // --- BANCO DE DADOS DOS TABULEIROS ---
+    function backToMenu() {
+        gameView.style.display = "none";
+        websiteView.style.display = "block";
+        window.scrollTo(0, document.getElementById('jogos').offsetTop);
+    }
+
+    // --- BANCO DE DADOS DOS 16 JOGOS ---
     const boardDatabase = {
         favorites: { title: "Favorites!", subtitle: "Say your favorite.", instruction: "My favorite [item] is...", spaces: [ {text:"START",type:"start"},{text:"Color",type:"standard"},{text:"Season",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Actor",type:"standard"},{text:"Candy",type:"standard"},{text:"Singer",type:"standard"},{text:"Day of the Week",type:"standard"},{text:"Meat",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Vegetable",type:"standard"},{text:"Fruit",type:"standard"},{text:"Fast Food",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"TV Show",type:"standard"},{text:"Book",type:"standard"},{text:"Time of Day",type:"standard"},{text:"Job",type:"standard"},{text:"Hobbie",type:"standard"},{text:"Class in School",type:"standard"},{text:"Movie",type:"standard"},{text:"Country",type:"standard"},{text:"Theme Park",type:"standard"},{text:"Dessert",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Drink",type:"standard"},{text:"Ice Cream Flavor",type:"standard"},{text:"Food",type:"standard"},{text:"Shoe Brand",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"City",type:"standard"},{text:"Sport",type:"standard"},{text:"Holiday",type:"standard"},{text:"Game",type:"standard"},{text:"Pet",type:"standard"},{text:"Word",type:"standard"},{text:"Music",type:"standard"},{text:"Feeling",type:"standard"},{text:"Animal",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Adjective",type:"standard"},{text:"Name",type:"standard"},{text:"FINISH",type:"finish"} ]},
         routine: { title: "Daily Routine", subtitle: "Present Simple", instruction: "I usually [action]...", spaces: [ {text:"START",type:"start"},{text:"Wake up",type:"standard"},{text:"Eat breakfast",type:"standard"},{text:"Brush teeth",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Go to school/work",type:"standard"},{text:"Take a shower",type:"standard"},{text:"Get dressed",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Have lunch",type:"standard"},{text:"Study",type:"standard"},{text:"Play games",type:"standard"},{text:"Watch TV",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Cook dinner",type:"standard"},{text:"Read a book",type:"standard"},{text:"Clean the room",type:"standard"},{text:"Go to bed",type:"standard"},{text:"Exercise",type:"standard"},{text:"Use the phone",type:"standard"},{text:"Walk the dog",type:"standard"},{text:"Wash dishes",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Relax",type:"standard"},{text:"FINISH",type:"finish"} ]},
         verbs: { title: "Irregular Verbs", subtitle: "Past Simple", instruction: "The past of [verb] is...", spaces: [ {text:"START",type:"start"},{text:"Go",type:"standard"},{text:"See",type:"standard"},{text:"Eat",type:"standard"},{text:"Drink",type:"standard"},{text:"Run",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Buy",type:"standard"},{text:"Think",type:"standard"},{text:"Sleep",type:"standard"},{text:"Speak",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Write",type:"standard"},{text:"Read",type:"standard"},{text:"Swim",type:"standard"},{text:"Drive",type:"standard"},{text:"Make",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Do",type:"standard"},{text:"Have",type:"standard"},{text:"Give",type:"standard"},{text:"Take",type:"standard"},{text:"Know",type:"standard"},{text:"Sing",type:"standard"},{text:"Fly",type:"standard"},{text:"Come",type:"standard"},{text:"Get",type:"standard"},{text:"FINISH",type:"finish"} ]},
         pp_context: { title: "Context Challenge", subtitle: "Present Perfect", instruction: "I [have context], so [sentence].", spaces: [ {text:"START",type:"start"},{text:"I missed the bus",type:"standard"},{text:"She bought a car",type:"standard"},{text:"They sold the house",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I lost my wallet",type:"standard"},{text:"He broke his leg",type:"standard"},{text:"We ate pizza",type:"standard"},{text:"She cried",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"The dog barked",type:"standard"},{text:"I forgot the answer",type:"standard"},{text:"They arrived late",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"He went to the doctor",type:"standard"},{text:"I slept all day",type:"standard"},{text:"We watched a movie",type:"standard"},{text:"She quit her job",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"I drank water",type:"standard"},{text:"They called the police",type:"standard"},{text:"He failed the test",type:"standard"},{text:"I took a shower",type:"standard"},{text:"We cleaned the room",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"She wrote a letter",type:"standard"},{text:"I visited my mom",type:"standard"},{text:"He bought flowers",type:"standard"},{text:"We ran away",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I found 10 dollars",type:"standard"},{text:"FINISH",type:"finish"} ]},
         conversation: { title: "Conversation Master", subtitle: "Talk for 1 minute!", instruction: "Let's talk about [topic]...", spaces: [ {text:"START",type:"start"},{text:"Dream Job",type:"standard"},{text:"Favorite Movie",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Best Friend",type:"standard"},{text:"Worst Habit",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Hobbies",type:"standard"},{text:"Rainy Day",type:"standard"},{text:"Biggest Fear",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Favorite Season",type:"standard"},{text:"Role Model",type:"standard"},{text:"Social Media",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Superpower",type:"standard"},{text:"Aliens",type:"standard"},{text:"Favorite Food",type:"standard"},{text:"Money or Fame",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Best Vacation",type:"standard"},{text:"Happiness",type:"standard"},{text:"Shopping",type:"standard"},{text:"GO AHEAD 4",type:"move",val:4},{text:"Technology",type:"standard"},{text:"Cooking",type:"standard"},{text:"Future Plans",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Favorite Animal",type:"standard"},{text:"Childhood",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Sports",type:"standard"},{text:"Music Taste",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Book or Movie",type:"standard"},{text:"Morning/Night",type:"standard"},{text:"Stress Relief",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Perfect Date",type:"standard"},{text:"Lottery Win",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Climate Change",type:"standard"},{text:"Learning English",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Video Games",type:"standard"},{text:"Holidays",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Guilty Pleasure",type:"standard"},{text:"Best Advice",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Hidden Talent",type:"standard"},{text:"A Lie You Told",type:"standard"},{text:"GO BACK 5",type:"move",val:-5},{text:"3 Wishes",type:"standard"},{text:"Embarrassing Moment",type:"standard"},{text:"Proud Moment",type:"standard"},{text:"Phobias",type:"standard"},{text:"Ideal House",type:"standard"},{text:"FINISH",type:"finish"} ]},
-        // NOVO JOGO AQUI (50 CASAS)
-        present_continuous: { title: "Make a Question", subtitle: "Transform into a question!", instruction: "Question: [sentence]?", spaces: [ {text:"START",type:"start"},{text:"She is sleeping",type:"standard"},{text:"They are watching TV",type:"standard"},{text:"He is reading a book",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I am listening to music",type:"standard"},{text:"We are learning English",type:"standard"},{text:"The dog is barking",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"It is raining",type:"standard"},{text:"She is driving to work",type:"standard"},{text:"They are playing soccer",type:"standard"},{text:"He is cooking dinner",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I am writing an email",type:"standard"},{text:"We are waiting for the bus",type:"standard"},{text:"The baby is crying",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"She is drinking coffee",type:"standard"},{text:"They are talking loudly",type:"standard"},{text:"He is running in the park",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"I am studying for a test",type:"standard"},{text:"We are eating pizza",type:"standard"},{text:"The sun is shining",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"She is working late",type:"standard"},{text:"They are dancing",type:"standard"},{text:"He is taking a shower",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I am fixing the car",type:"standard"},{text:"We are cleaning the house",type:"standard"},{text:"The cat is sleeping",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"She is singing a song",type:"standard"},{text:"They are traveling to London",type:"standard"},{text:"He is buying groceries",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I am making a cake",type:"standard"},{text:"We are laughing",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"The teacher is speaking",type:"standard"},{text:"She is typing a letter",type:"standard"},{text:"They are building a wall",type:"standard"},{text:"He is painting the room",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I am feeling happy",type:"standard"},{text:"We are going home",type:"standard"},{text:"The birds are flying",type:"standard"},{text:"FINISH",type:"finish"} ]}
+        present_continuous: { title: "Make a Question", subtitle: "Transform into a question!", instruction: "Question: [sentence]?", spaces: [ {text:"START",type:"start"},{text:"She is sleeping",type:"standard"},{text:"They are watching TV",type:"standard"},{text:"He is reading a book",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I am listening to music",type:"standard"},{text:"We are learning English",type:"standard"},{text:"The dog is barking",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"It is raining",type:"standard"},{text:"She is driving to work",type:"standard"},{text:"They are playing soccer",type:"standard"},{text:"He is cooking dinner",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I am writing an email",type:"standard"},{text:"We are waiting for the bus",type:"standard"},{text:"The baby is crying",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"She is drinking coffee",type:"standard"},{text:"They are talking loudly",type:"standard"},{text:"He is running in the park",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"I am studying for a test",type:"standard"},{text:"We are eating pizza",type:"standard"},{text:"The sun is shining",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"She is working late",type:"standard"},{text:"They are dancing",type:"standard"},{text:"He is taking a shower",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I am fixing the car",type:"standard"},{text:"We are cleaning the house",type:"standard"},{text:"The cat is sleeping",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"She is singing a song",type:"standard"},{text:"They are traveling to London",type:"standard"},{text:"He is buying groceries",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I am making a cake",type:"standard"},{text:"We are laughing",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"The teacher is speaking",type:"standard"},{text:"She is typing a letter",type:"standard"},{text:"They are building a wall",type:"standard"},{text:"He is painting the room",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I am feeling happy",type:"standard"},{text:"We are going home",type:"standard"},{text:"The birds are flying",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        // 10 NOVOS JOGOS
+        whr_method: { title: "The WHR Method", subtitle: "Use Why, How, and Result!", instruction: "Situation: [sentence]", spaces: [ {text:"START",type:"start"},{text:"I was late for work",type:"standard"},{text:"I learned a new language",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I bought a new phone",type:"standard"},{text:"I cooked dinner",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I lost my keys",type:"standard"},{text:"I broke a window",type:"standard"},{text:"I won a prize",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I met an old friend",type:"standard"},{text:"I forgot to pay the bill",type:"standard"},{text:"I started exercising",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I quit my job",type:"standard"},{text:"I moved to a new city",type:"standard"},{text:"I adopted a pet",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"I got a promotion",type:"standard"},{text:"I failed a test",type:"standard"},{text:"I painted my house",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"I missed the flight",type:"standard"},{text:"I helped a stranger",type:"standard"},{text:"I saved money",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        homophones: { title: "Homophones Challenge", subtitle: "Say a word with the exact same sound!", instruction: "Homophone for: [item]?", spaces: [ {text:"START",type:"start"},{text:"Two",type:"standard"},{text:"See",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Hear",type:"standard"},{text:"Right",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Buy",type:"standard"},{text:"Sun",type:"standard"},{text:"Meat",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Knew",type:"standard"},{text:"Eight",type:"standard"},{text:"Hour",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Mail",type:"standard"},{text:"Peace",type:"standard"},{text:"Flour",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Week",type:"standard"},{text:"Tale",type:"standard"},{text:"Whole",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Bored",type:"standard"},{text:"Cell",type:"standard"},{text:"Deer",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        future_plans: { title: "Future Plans", subtitle: "Will or Going To?", instruction: "Plan for: [item]", spaces: [ {text:"START",type:"start"},{text:"Next weekend",type:"standard"},{text:"In 5 years",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Tomorrow morning",type:"standard"},{text:"Next summer",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Tonight",type:"standard"},{text:"After class",type:"standard"},{text:"Next year",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"On your next birthday",type:"standard"},{text:"When you retire",type:"standard"},{text:"Next month",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"This evening",type:"standard"},{text:"In 10 years",type:"standard"},{text:"Next Monday",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"During vacation",type:"standard"},{text:"When you arrive home",type:"standard"},{text:"Before dinner",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Tomorrow night",type:"standard"},{text:"Next Christmas",type:"standard"},{text:"On Sunday",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        conditionals: { title: "Conditionals", subtitle: "Finish the sentence!", instruction: "If [sentence], I...", spaces: [ {text:"START",type:"start"},{text:"it rains tomorrow",type:"standard"},{text:"I win the lottery",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I lose my phone",type:"standard"},{text:"I see a ghost",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I get a promotion",type:"standard"},{text:"I wake up late",type:"standard"},{text:"I meet a celebrity",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"my car breaks down",type:"standard"},{text:"I find 100 dollars",type:"standard"},{text:"I have free time",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I forget a birthday",type:"standard"},{text:"I travel abroad",type:"standard"},{text:"I feel sick",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"I miss the bus",type:"standard"},{text:"I learn English fast",type:"standard"},{text:"I eat too much",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"I get lost",type:"standard"},{text:"I have a bad day",type:"standard"},{text:"I become rich",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        phrasal_verbs: { title: "Phrasal Verbs", subtitle: "Make a sentence!", instruction: "Use: [verb]", spaces: [ {text:"START",type:"start"},{text:"Give up",type:"standard"},{text:"Look for",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Run out of",type:"standard"},{text:"Wake up",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Put on",type:"standard"},{text:"Take off",type:"standard"},{text:"Turn on",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Turn off",type:"standard"},{text:"Find out",type:"standard"},{text:"Grow up",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Bring up",type:"standard"},{text:"Call off",type:"standard"},{text:"Figure out",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Look after",type:"standard"},{text:"Pass away",type:"standard"},{text:"Show up",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Work out",type:"standard"},{text:"Hold on",type:"standard"},{text:"Keep on",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        business: { title: "Business English", subtitle: "Corporate vocabulary.", instruction: "Talk about a [item]", spaces: [ {text:"START",type:"start"},{text:"Meeting",type:"standard"},{text:"Deadline",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"CEO",type:"standard"},{text:"Budget",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Resume",type:"standard"},{text:"Interview",type:"standard"},{text:"Salary",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Promotion",type:"standard"},{text:"Colleague",type:"standard"},{text:"Client",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Strategy",type:"standard"},{text:"Feedback",type:"standard"},{text:"Presentation",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Target",type:"standard"},{text:"Profit",type:"standard"},{text:"Contract",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Negotiation",type:"standard"},{text:"Investment",type:"standard"},{text:"Competitor",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        travel: { title: "Travel & Airport", subtitle: "Vacation vocabulary.", instruction: "Explain what [item] is", spaces: [ {text:"START",type:"start"},{text:"Passport",type:"standard"},{text:"Luggage",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Boarding Pass",type:"standard"},{text:"Flight",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Hotel",type:"standard"},{text:"Tourist",type:"standard"},{text:"Guide",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Map",type:"standard"},{text:"Ticket",type:"standard"},{text:"Delayed",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Customs",type:"standard"},{text:"Security",type:"standard"},{text:"Souvenir",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Destination",type:"standard"},{text:"Gate",type:"standard"},{text:"Take off",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Land",type:"standard"},{text:"Passenger",type:"standard"},{text:"Visa",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        food: { title: "Food & Cooking", subtitle: "Culinary vocabulary.", instruction: "Describe [item]", spaces: [ {text:"START",type:"start"},{text:"Spicy",type:"standard"},{text:"Sweet",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Bake",type:"standard"},{text:"Fry",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Delicious",type:"standard"},{text:"Disgusting",type:"standard"},{text:"Fork",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Knife",type:"standard"},{text:"Spoon",type:"standard"},{text:"Recipe",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Ingredient",type:"standard"},{text:"Boil",type:"standard"},{text:"Grill",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Salty",type:"standard"},{text:"Sour",type:"standard"},{text:"Bitter",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Dessert",type:"standard"},{text:"Appetizer",type:"standard"},{text:"Main course",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        emotions: { title: "Emotions", subtitle: "Express yourself.", instruction: "When do you feel [item]?", spaces: [ {text:"START",type:"start"},{text:"Happy",type:"standard"},{text:"Sad",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Angry",type:"standard"},{text:"Frustrated",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Excited",type:"standard"},{text:"Nervous",type:"standard"},{text:"Scared",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Bored",type:"standard"},{text:"Surprised",type:"standard"},{text:"Confused",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Tired",type:"standard"},{text:"Relaxed",type:"standard"},{text:"Proud",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Embarrassed",type:"standard"},{text:"Jealous",type:"standard"},{text:"Lonely",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Grateful",type:"standard"},{text:"Guilty",type:"standard"},{text:"Hopeful",type:"standard"},{text:"FINISH",type:"finish"} ]},
+        advice: { title: "Give Advice", subtitle: "Use Should or Shouldn't", instruction: "Advice for: [sentence]", spaces: [ {text:"START",type:"start"},{text:"I have a headache",type:"standard"},{text:"I want to lose weight",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I am tired",type:"standard"},{text:"I need money",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I feel sad",type:"standard"},{text:"I can't sleep",type:"standard"},{text:"I am always late",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I failed my test",type:"standard"},{text:"I lost my wallet",type:"standard"},{text:"I want to learn English",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I have a toothache",type:"standard"},{text:"I am stressed",type:"standard"},{text:"I want a new job",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"I feel bored",type:"standard"},{text:"I am cold",type:"standard"},{text:"I fought with my friend",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"I broke my phone",type:"standard"},{text:"I want to travel",type:"standard"},{text:"I ate too much",type:"standard"},{text:"FINISH",type:"finish"} ]}
     };
 
     let currentSpaces = []; let currentInstruction = ""; let players = []; let currentPlayerIndex = 0; let isAnimating = false;
     const playerColors = ["p1-token", "p2-token", "p3-token", "p4-token", "p5-token", "p6-token"];
     const textColors = ["p1-color", "p2-color", "p3-color", "p4-color", "p5-color", "p6-color"];
-    const menuView = document.getElementById("menu-view"); const gameView = document.getElementById("game-view"); const instructionsView = document.getElementById("instructions-view");
+    const websiteView = document.getElementById("website-view"); const gameView = document.getElementById("game-view");
     const messageBox = document.getElementById("messageBox"); const boardEl = document.getElementById("gameBoard"); const rollBtn = document.getElementById("rollBtn");
     const visualDice = document.getElementById("visualDice"); const playerCountSelect = document.getElementById("playerCount"); const playersArea = document.getElementById("players-area");
 
@@ -347,13 +357,11 @@
         const gameData = boardDatabase[gameId]; currentSpaces = gameData.spaces; currentInstruction = gameData.instruction;
         const numPlayers = parseInt(playerCountSelect.value); setupPlayers(numPlayers);
         resetLogic();
-        menuView.style.display = "none"; instructionsView.style.display = "none"; gameView.style.display = "flex";
-        window.scrollTo(0, 0); // Sobe a página ao iniciar
+        websiteView.style.display = "none"; gameView.style.display = "flex";
+        window.scrollTo(0, 0);
         initBoard();
     }
 
-    function showInstructions() { menuView.style.display = "none"; gameView.style.display = "none"; instructionsView.style.display = "flex"; }
-    function hideInstructions() { instructionsView.style.display = "none"; menuView.style.display = "flex"; }
     function setupPlayers(count) {
         players = []; playersArea.innerHTML = "";
         for (let i = 0; i < count; i++) {
@@ -363,7 +371,7 @@
             playersArea.appendChild(wrapper);
         }
     }
-    function backToMenu() { gameView.style.display = "none"; instructionsView.style.display = "none"; menuView.style.display = "flex"; }
+
     function initBoard() {
         boardEl.innerHTML = "";
         currentSpaces.forEach((space, index) => {
@@ -375,6 +383,7 @@
         });
         updateTokens();
     }
+    
     function updateName(playerIndex, newName) { if(newName.trim() === "") newName = `P${playerIndex + 1}`; players[playerIndex].name = newName; updateTokens(); }
     function updateTokens() { document.querySelectorAll(".token-container").forEach(el => el.innerHTML = ""); players.forEach(p => { const container = document.getElementById(`tokens-${p.pos}`); if (container) { const token = document.createElement("div"); token.className = `token ${p.cssClass}`; token.title = p.name; container.appendChild(token); } }); }
     function resetGame() { if(!confirm("Reiniciar o jogo?")) return; resetLogic(); updateTokens(); }
@@ -383,36 +392,33 @@
         players.forEach(p => p.pos = 0);
         currentPlayerIndex = 0;
         isAnimating = false;
-        
-        rollBtn.disabled = false;
-        rollBtn.innerText = "ROLAR";
-        rollBtn.onclick = playTurn;
-        rollBtn.style.backgroundColor = "#3742fa"; 
-        
-        visualDice.innerText = "🎲";
-        visualDice.onclick = playTurn;
-        visualDice.style.cursor = "pointer";
-        
-        messageBox.style.backgroundColor = "#fff3cd";
-        messageBox.style.color = "#856404";
-        messageBox.innerHTML = "Clique no dado para começar!";
+        rollBtn.disabled = false; rollBtn.innerText = "ROLAR"; rollBtn.onclick = playTurn; rollBtn.style.backgroundColor = "var(--primary-color)"; 
+        visualDice.innerText = "🎲"; visualDice.onclick = playTurn; visualDice.style.cursor = "pointer";
+        messageBox.style.backgroundColor = "#fff3cd"; messageBox.style.color = "#856404"; messageBox.innerHTML = "Clique no dado para começar!";
         updateActiveTurnUI();
     }
 
     function updateActiveTurnUI() { players.forEach((p, index) => { const wrapper = document.getElementById(`wrapper-${index}`); if (index === currentPlayerIndex) { wrapper.classList.add("active-turn"); } else { wrapper.classList.remove("active-turn"); } }); }
+    
     function playTurn() {
         if (isAnimating) return; isAnimating = true; rollBtn.disabled = true;
         const player = players[currentPlayerIndex]; messageBox.innerHTML = `🎲 Rolando para <strong>${player.name}</strong>...`; visualDice.classList.add("shaking");
         let rollInterval = setInterval(() => { visualDice.innerText = Math.floor(Math.random() * 6) + 1; }, 80);
         setTimeout(() => { clearInterval(rollInterval); visualDice.classList.remove("shaking"); const dice = Math.floor(Math.random() * 6) + 1; visualDice.innerText = dice; messageBox.innerHTML = `🎲 ${player.name} tirou <strong>${dice}</strong>!`; setTimeout(() => { processMove(player, dice); }, 500); }, 1000);
     }
-    function processMove(player, dice) { let newPos = player.pos + dice; const lastIndex = currentSpaces.length - 1; if (newPos >= lastIndex) { player.pos = lastIndex; updateTokens(); finishGame(player); } else { movePlayer(player, newPos); } }
+    
+    function processMove(player, dice) { 
+        let newPos = player.pos + dice; const lastIndex = currentSpaces.length - 1; 
+        if (newPos >= lastIndex) { player.pos = lastIndex; updateTokens(); finishGame(player); } else { movePlayer(player, newPos); } 
+    }
+    
     function movePlayer(player, targetPos) {
         player.pos = targetPos; updateTokens(); const space = currentSpaces[targetPos];
         if (space.type === "move") { messageBox.innerHTML += `<br>🚀 Casa Especial! ${space.text}`; setTimeout(() => { let jumpPos = player.pos + space.val; if (jumpPos < 0) jumpPos = 0; movePlayer(player, jumpPos); }, 1000); return; }
         else if (space.type === "trade") { const opponents = players.filter(p => p.id !== player.id); const target = opponents[Math.floor(Math.random() * opponents.length)]; messageBox.innerHTML += `<br>🔄 TROCA COM: <strong>${target.name}</strong>!`; setTimeout(() => { const tempPos = player.pos; player.pos = target.pos; target.pos = tempPos; updateTokens(); const newSpace = currentSpaces[player.pos]; endTurn(player, newSpace); }, 1500); return; }
         endTurn(player, space);
     }
+    
     function endTurn(player, space) {
         if (space.type !== "start" && space.type !== "finish") {
             let instructionText = currentInstruction.replace("[item]", space.text.toLowerCase()).replace("[action]", space.text.toLowerCase()).replace("[verb]", space.text.toLowerCase()).replace("[sentence]", space.text.toLowerCase()).replace("[topic]", space.text.toLowerCase()).replace("[have context]", "<span style='text-decoration: underline'>have + p.p.</span>");
@@ -422,8 +428,7 @@
     }
 
     function finishGame(winner) {
-        winner.pos = currentSpaces.length - 1;
-        updateTokens();
+        winner.pos = currentSpaces.length - 1; updateTokens();
         messageBox.innerHTML = `🎉 <strong>${winner.name} VENCEU!</strong> 🎉`;
         messageBox.style.backgroundColor = "#d1e7dd"; messageBox.style.color = "#0f5132";
         rollBtn.innerText = "JOGAR DE NOVO"; rollBtn.onclick = resetGame; rollBtn.style.backgroundColor = "#2ed573"; rollBtn.disabled = false; 
