@@ -95,13 +95,18 @@
         footer { background: #2d3436; color: white; width: 100%; text-align: center; padding: 30px 20px; margin-top: auto; }
         footer p { opacity: 0.8; margin: 5px 0; }
 
-        /* --- SEO CONTENT --- */
+        /* --- SEO CONTENT CENTRALIZADO --- */
         .seo-content {
-            margin-top: 60px; background: white; padding: 50px; border-radius: 20px;
+            margin: 60px auto 50px auto; /* Centraliza a caixa na tela perfeitamente */
+            background: white; padding: 50px; border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 900px; width: 95%;
-            color: var(--text-color); line-height: 1.8; text-align: left; margin-bottom: 50px;
+            color: var(--text-color); line-height: 1.8; text-align: left;
         }
-        .seo-content h2 { color: var(--primary-color); font-size: 1.8em; margin-bottom: 20px; border-bottom: 2px solid var(--light-bg); padding-bottom: 10px;}
+        .seo-content h2 { 
+            color: var(--primary-color); font-size: 1.8em; margin-bottom: 20px; 
+            border-bottom: 2px solid var(--light-bg); padding-bottom: 10px;
+            text-align: center; /* Centraliza o título principal */
+        }
         .seo-content h3 { color: #d35400; font-size: 1.4em; margin-top: 30px; margin-bottom: 15px; }
         .seo-content p { margin-bottom: 15px; font-size: 1.05em; color: var(--light-text); text-align: left;}
         .seo-content ul { padding-left: 20px; margin-bottom: 20px; color: var(--light-text); }
@@ -169,6 +174,7 @@
             #visualDice { width: 45px; height: 45px; font-size: 24px;}
             .board { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px;}
             .space { min-height: 100px; font-size: 1em; padding: 10px;}
+            .seo-content { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -301,7 +307,7 @@
             </div>
 
             <h3>3. Present Perfect (Context Challenge)</h3>
-            <p>O Present Perfect conecta o passado com o presente. O nosso <em>Context Challenge</em> obriga o aluno a pensar em uma ação que acabou de acontecer para justificar um resultado no presente.</p>
+            <p>O Present Perfect conecta o passado com o presente. O nosso <em>Context Challenge</em> obriga o aluno a pensar em uma ação que acabou de acontecer para justifycar um resultado no presente.</p>
             <div class="grammar-box">
                 Situação: <em>I missed the bus.</em><br>
                 Contexto criado: <code>I <strong>have woken up</strong> late, so I missed the bus.</code>
