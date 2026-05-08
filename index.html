@@ -97,7 +97,7 @@
 
         /* --- SEO CONTENT CENTRALIZADO --- */
         .seo-content {
-            margin: 60px auto 50px auto; /* Centraliza a caixa na tela perfeitamente */
+            margin: 60px auto 50px auto; 
             background: white; padding: 50px; border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 900px; width: 95%;
             color: var(--text-color); line-height: 1.8; text-align: left;
@@ -105,7 +105,7 @@
         .seo-content h2 { 
             color: var(--primary-color); font-size: 1.8em; margin-bottom: 20px; 
             border-bottom: 2px solid var(--light-bg); padding-bottom: 10px;
-            text-align: center; /* Centraliza o título principal */
+            text-align: center; 
         }
         .seo-content h3 { color: #d35400; font-size: 1.4em; margin-top: 30px; margin-bottom: 15px; }
         .seo-content p { margin-bottom: 15px; font-size: 1.05em; color: var(--light-text); text-align: left;}
@@ -137,8 +137,15 @@
         
         #messageBox { width: 95%; max-width: 800px; background-color: #fff3cd; border: 2px solid #ffeeba; border-radius: 12px; padding: 15px 20px; color: #856404; text-align: center; font-size: 1.3em; line-height: 1.4; box-shadow: 0 4px 10px rgba(0,0,0,0.05); font-weight: 500;}
 
-        /* Controles (Dado) */
-        .floating-controls { position: fixed; bottom: 20px; left: 20px; background: rgba(255, 255, 255, 0.98); padding: 12px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 1000; display: flex; flex-direction: column; align-items: center; gap: 8px; border: 2px solid var(--primary-color); width: 85px; }
+        /* Controles (Dado) CENTRALIZADO NO FUNDO */
+        .floating-controls { 
+            position: fixed; bottom: 20px; 
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translateX(-50%); /* Ajuste fino para centralizar perfeitamente */
+            background: rgba(255, 255, 255, 0.98); padding: 12px; border-radius: 16px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 2000; /* Aumentado para garantir que fique sobre o tabuleiro */
+            display: flex; flex-direction: column; align-items: center; gap: 8px; border: 2px solid var(--primary-color); width: 85px; 
+        }
         .dice-container { perspective: 1000px; }
         #visualDice { font-size: 32px; width: 55px; height: 55px; background-color: white; border: 2px solid var(--primary-color); border-radius: 12px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); font-weight: bold; color: var(--primary-color); cursor: pointer; user-select: none; transition: transform 0.2s; }
         .shaking { animation: shake 0.4s infinite; background-color: var(--secondary-color) !important; color: white !important; border-color: var(--secondary-color) !important; }
@@ -170,7 +177,7 @@
         
         @media (max-width: 768px) {
             .hero h2 { font-size: 2em; }
-            .floating-controls { bottom: 10px; left: 10px; padding: 6px; width: 65px;}
+            .floating-controls { bottom: 10px; left: 50%; transform: translateX(-50%); padding: 6px; width: 65px;}
             #visualDice { width: 45px; height: 45px; font-size: 24px;}
             .board { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px;}
             .space { min-height: 100px; font-size: 1em; padding: 10px;}
@@ -307,7 +314,7 @@
             </div>
 
             <h3>3. Present Perfect (Context Challenge)</h3>
-            <p>O Present Perfect conecta o passado com o presente. O nosso <em>Context Challenge</em> obriga o aluno a pensar em uma ação que acabou de acontecer para justifycar um resultado no presente.</p>
+            <p>O Present Perfect conecta o passado com o presente. O nosso <em>Context Challenge</em> obriga o aluno a pensar em uma ação que acabou de acontecer para justificyar um resultado no presente.</p>
             <div class="grammar-box">
                 Situação: <em>I missed the bus.</em><br>
                 Contexto criado: <code>I <strong>have woken up</strong> late, so I missed the bus.</code>
@@ -425,7 +432,10 @@
         travel: { title: "Travel & Airport", subtitle: "Vacation vocabulary.", instruction: "Explain what [item] is", spaces: [ {text:"START",type:"start"},{text:"Passport",type:"standard"},{text:"Luggage",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Boarding Pass",type:"standard"},{text:"Flight",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Hotel",type:"standard"},{text:"Tourist",type:"standard"},{text:"Guide",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Map",type:"standard"},{text:"Ticket",type:"standard"},{text:"Delayed",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Customs",type:"standard"},{text:"Security",type:"standard"},{text:"Souvenir",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Destination",type:"standard"},{text:"Gate",type:"standard"},{text:"Take off",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Land",type:"standard"},{text:"Passenger",type:"standard"},{text:"Visa",type:"standard"},{text:"FINISH",type:"finish"} ]},
         food: { title: "Food & Cooking", subtitle: "Culinary vocabulary.", instruction: "Describe [item]", spaces: [ {text:"START",type:"start"},{text:"Spicy",type:"standard"},{text:"Sweet",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Bake",type:"standard"},{text:"Fry",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Delicious",type:"standard"},{text:"Disgusting",type:"standard"},{text:"Fork",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Knife",type:"standard"},{text:"Spoon",type:"standard"},{text:"Recipe",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Ingredient",type:"standard"},{text:"Boil",type:"standard"},{text:"Grill",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Salty",type:"standard"},{text:"Sour",type:"standard"},{text:"Bitter",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Dessert",type:"standard"},{text:"Appetizer",type:"standard"},{text:"Main course",type:"standard"},{text:"FINISH",type:"finish"} ]},
         emotions: { title: "Emotions", subtitle: "Express yourself.", instruction: "When do you feel [item]?", spaces: [ {text:"START",type:"start"},{text:"Happy",type:"standard"},{text:"Sad",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"Angry",type:"standard"},{text:"Frustrated",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Excited",type:"standard"},{text:"Nervous",type:"standard"},{text:"Scared",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"Bored",type:"standard"},{text:"Surprised",type:"standard"},{text:"Confused",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"Tired",type:"standard"},{text:"Relaxed",type:"standard"},{text:"Proud",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"Embarrassed",type:"standard"},{text:"Jealous",type:"standard"},{text:"Lonely",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"Grateful",type:"standard"},{text:"Guilty",type:"standard"},{text:"Hopeful",type:"standard"},{text:"FINISH",type:"finish"} ]},
-        advice: { title: "Give Advice", subtitle: "Use Should or Shouldn't", instruction: "Advice for: [sentence]", spaces: [ {text:"START",type:"start"},{text:"I have a headache",type:"standard"},{text:"I want to lose weight",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I am tired",type:"standard"},{text:"I need money",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I feel sad",type:"standard"},{text:"I can't sleep",type:"standard"},{text:"I am always late",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I failed my test",type:"standard"},{text:"I lost my wallet",type:"standard"},{text:"I want to learn English",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I have a toothache",type:"standard"},{text:"I am stressed",type:"standard"},{text:"I want a new job",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"I feel bored",type:"standard"},{text:"I am cold",type:"standard"},{text:"I fought with my friend",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"I broke my phone",type:"standard"},{text:"I want to travel",type:"standard"},{text:"I ate too much",type:"standard"},{text:"FINISH",type:"finish"} ]}
+        // TABULEIRO EXPANDIDO (+40 CASAS)
+        advice: { title: "Give Advice", subtitle: "Use Should or Shouldn't", instruction: "Advice for: [sentence]", spaces: [ {text:"START",type:"start"},{text:"I have a headache",type:"standard"},{text:"I want to lose weight",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"I am tired",type:"standard"},{text:"I need money",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I feel sad",type:"standard"},{text:"I can't sleep",type:"standard"},{text:"I am always late",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I failed my test",type:"standard"},{text:"I lost my wallet",type:"standard"},{text:"I want to learn English",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I have a toothache",type:"standard"},{text:"I am stressed",type:"standard"},{text:"I want a new job",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I feel bored",type:"standard"},{text:"I am cold",type:"standard"},{text:"I fought with my friend",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"I broke my phone",type:"standard"},{text:"I want to travel",type:"standard"},{text:"I ate too much",type:"standard"},{text:"TRADE PLACES",type:"trade"},
+        // Novas 40 casas misturadas com especiais
+        {text:"I have a bad cold",type:"standard"},{text:"I want to buy a house",type:"standard"},{text:"I am addicted to my phone",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"I can't find my passport",type:"standard"},{text:"My neighbor's dog barks all night",type:"standard"},{text:"I hate my major",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I am afraid of public speaking",type:"standard"},{text:"I accidentally sent an embarrassing email",type:"standard"},{text:"I want to start a business",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I am always fighting with my partner",type:"standard"},{text:"I want to learn the guitar",type:"standard"},{text:"I spent too much money",type:"standard"},{text:"GO AHEAD 4",type:"move",val:4},{text:"I am procrastinating on a big project",type:"standard"},{text:"I want to improve my mental health",type:"standard"},{text:"My best friend is mad at me",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I can't understand native speakers",type:"standard"},{text:"I want to get fit but hate the gym",type:"standard"},{text:"I am bored with my daily routine",type:"standard"},{text:"GO BACK 3",type:"move",val:-3},{text:"I ruined my white shirt with coffee",type:"standard"},{text:"I want to quit smoking",type:"standard"},{text:"I am struggling with time management",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I want to wake up earlier",type:"standard"},{text:"I am nervous about a job interview",type:"standard"},{text:"I don't know what to buy for mom's birthday",type:"standard"},{text:"GO AHEAD 3",type:"move",val:3},{text:"I want to eat healthier",type:"standard"},{text:"I am scared of flying",type:"standard"},{text:"I spilled water on my laptop",type:"standard"},{text:"GO BACK 2",type:"move",val:-2},{text:"I want to move abroad",type:"standard"},{text:"I am feeling unmotivated at work",type:"standard"},{text:"My internet connection is too slow",type:"standard"},{text:"TRADE PLACES",type:"trade"},{text:"I want to improve relations with my siblings",type:"standard"},{text:"I am always feeling overwhelmed",type:"standard"},{text:"I don't have any hobbies",type:"standard"},{text:"GO AHEAD 2",type:"move",val:2},{text:"I want to save for a vacation",type:"standard"},{text:"My car broke down on the highway",type:"standard"},{text:"I want to learn how to cook",type:"standard"},{text:"GO BACK 5",type:"move",val:-5},{text:"I am not getting enough sleep",type:"standard"},{text:"I want to be more confident",type:"standard"},{text:"I am afraid of trying new things",type:"standard"},{text:"I want to declutter my apartment",type:"standard"},{text:"FINISH",type:"finish"} ]}
     };
 
     let currentSpaces = []; let currentInstruction = ""; let players = []; let currentPlayerIndex = 0; let isAnimating = false;
